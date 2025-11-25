@@ -1,19 +1,127 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Box, Container, Typography, Grid, Button, Chip, Rating, Divider, IconButton } from '@mui/material';
+import { motion } from 'framer-motion';
+import { Box, Container, Typography, Grid, Button, Chip, Rating, Divider, IconButton, Checkbox, FormControlLabel, Avatar, Card } from '@mui/material';
 import { Add, Remove, ArrowBack } from '@mui/icons-material';
 import { useCart } from '../context/CartContext';
 import { useProducts } from '../context/ProductsContext';
-import { motion } from 'framer-motion';
+
+// Componente para cada item de complemento
+const ComplementItem = ({ complement, selected, onToggle }) => {
+    return (
+        <Box
+            sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 2,
+                p: 1.5,
+                mb: 1.5,
+                borderRadius: 2,
+                border: '1px solid',
+                borderColor: selected ? 'primary.main' : 'grey.300',
+                bgcolor: selected ? 'primary.50' : 'grey.50',
+                transition: 'all 0.2s',
+                cursor: 'pointer',
+                '&:hover': {
+                    borderColor: 'primary.main',
+                    bgcolor: selected ? 'primary.100' : 'grey.100'
+                }
+            }}
+            onClick={onToggle}
+        >
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        checked={selected}
+                        onChange={onToggle}
+                        onClick={(e) => e.stopPropagation()}
+                        size="small"
+                    />
+                }
+                label=""
+                sx={{ m: 0 }}
+            />
+            <Avatar
+                src={complement.imageUrl}
+                alt={complement.title}
+                variant="rounded"
+                sx={{ width: 50, height: 50 }}
+            />
+            <Box sx={{ flex: 1, minWidth: 0 }}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', gap: 1 }}>
+                    <Typography variant="body2" fontWeight="bold" noWrap sx={{ flex: 1 }}>
+                        {complement.title}
+                    </Typography>
+                    <Typography variant="body2" fontWeight="bold" color="primary.dark" sx={{ whiteSpace: 'nowrap' }}>
+                        +${complement.price?.toFixed(2) || '0.00'}
+                    </Typography>
+                </Box>
+                <Typography
+                    variant="caption"
+                    color="text.secondary"
+                    sx={{
+                        display: '-webkit-box',
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: 'vertical',
+                        overflow: 'hidden'
+                    }}
+                >
+                    {complement.description}
+                </Typography>
+            </Box>
+        </Box>
+    );
+};
 
 const ProductDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const { addToCart, openCart } = useCart();
-    const { getProductById } = useProducts();
+    const { getProductById, products } = useProducts();
     const [quantity, setQuantity] = useState(1);
+    const [selectedComplements, setSelectedComplements] = useState([]);
 
     const product = getProductById(id);
+
+    useEffect(() => {
+        if (product) {
+            document.title = `${product.title} | Greenpaw`;
+        }
+    }, [product?.title]);
+    
+    // Obtener complementos filtrando por tags "complemento-{tag-del-producto}"
+    const complementProducts = React.useMemo(() => {
+        if (!products || !product || !product.tags) return [];
+        
+        // Buscar tags del producto actual que NO empiecen con "complemento-"
+        const productTags = product.tags.filter(tag => !tag.startsWith('complemento-'));
+        
+        // Filtrar productos que tengan tags "complemento-{tag-del-producto-actual}"
+        return products
+            .filter(p => {
+                // No incluir el producto actual
+                if (p.id === product.id) return false;
+                
+                // Verificar si tiene alguna tag "complemento-{tag}"
+                return p.tags?.some(tag => {
+                    if (!tag.startsWith('complemento-')) return false;
+                    
+                    // Extraer el tag sin el prefijo "complemento-"
+                    const complementTag = tag.replace('complemento-', '');
+                    
+                    // Verificar si coincide con alguna tag del producto actual
+                    return productTags.includes(complementTag);
+                });
+            })
+            .map(p => ({
+                id: p.id,
+                title: p.title,
+                description: p.description,
+                imageUrl: p.images[0],
+                price: p.price,
+                variantId: p.variantId
+            }));
+    }, [products, product]);
 
     if (!product) {
         return (
@@ -25,13 +133,22 @@ const ProductDetail = () => {
     }
 
     const handleAddToCart = () => {
+        // Agregar producto principal
         addToCart(product, quantity);
+        
+        // Agregar complementos seleccionados
+        selectedComplements.forEach(complementId => {
+            const complement = complementProducts.find(c => c.id === complementId);
+            if (complement) {
+                addToCart({
+                    ...complement,
+                    images: [complement.imageUrl]
+                }, 1);
+            }
+        });
+        
         openCart();
     };
-
-    useEffect(() => {
-        document.title = `${product.title} | Greenpaw`;
-    }, [product.title]);
 
     return (
         <Container maxWidth="lg" sx={{ py: 8 }}>
@@ -99,14 +216,83 @@ const ProductDetail = () => {
                             {product.description}
                         </Typography>
 
-                        <Box sx={{ mb: 4 }}>
-                            <Typography variant="subtitle1" fontWeight="bold" gutterBottom>Características:</Typography>
-                            <ul style={{ paddingLeft: 20 }}>
-                                {product.features.map((feature, index) => (
-                                    <li key={index}><Typography variant="body2">{feature}</Typography></li>
-                                ))}
-                            </ul>
-                        </Box>
+                        {/* Sección de Complementos */}
+                        {complementProducts && complementProducts.length > 0 && (
+                            <Card
+                                sx={{
+                                    mb: 4,
+                                    p: 3,
+                                    bgcolor: 'background.paper',
+                                    border: '1px solid',
+                                    borderColor: 'grey.200'
+                                }}
+                            >
+                                <Typography variant="h6" fontWeight="bold" gutterBottom>
+                                    Complementos
+                                </Typography>
+                                <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+                                    Mejora tu experiencia con estos productos
+                                </Typography>
+
+                                <Box>
+                                    {complementProducts.map((complement) => (
+                                        <ComplementItem
+                                            key={complement.id}
+                                            complement={complement}
+                                            selected={selectedComplements.includes(complement.id)}
+                                            onToggle={() => {
+                                                setSelectedComplements(prev =>
+                                                    prev.includes(complement.id)
+                                                        ? prev.filter(id => id !== complement.id)
+                                                        : [...prev, complement.id]
+                                                );
+                                            }}
+                                        />
+                                    ))}
+                                </Box>
+                            </Card>
+                        )}
+
+                        {/* Resumen de precio total */}
+                        {selectedComplements.length > 0 && (
+                            <Box sx={{ mb: 3, p: 2, bgcolor: 'success.50', borderRadius: 2, border: '1px solid', borderColor: 'success.200' }}>
+                                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                                    <Typography variant="body2" color="text.secondary">
+                                        Producto principal (x{quantity})
+                                    </Typography>
+                                    <Typography variant="body2" fontWeight="medium">
+                                        ${(product.price * quantity).toFixed(2)}
+                                    </Typography>
+                                </Box>
+                                {complementProducts
+                                    .filter(c => selectedComplements.includes(c.id))
+                                    .map(complement => (
+                                        <Box key={complement.id} sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                                            <Typography variant="body2" color="text.secondary">
+                                                {complement.title}
+                                            </Typography>
+                                            <Typography variant="body2" fontWeight="medium">
+                                                +${complement.price.toFixed(2)}
+                                            </Typography>
+                                        </Box>
+                                    ))
+                                }
+                                <Divider sx={{ my: 1 }} />
+                                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                                    <Typography variant="subtitle1" fontWeight="bold">
+                                        Total
+                                    </Typography>
+                                    <Typography variant="subtitle1" fontWeight="bold" color="primary.dark">
+                                        ${(
+                                            product.price * quantity +
+                                            complementProducts
+                                                .filter(c => selectedComplements.includes(c.id))
+                                                .reduce((sum, c) => sum + c.price, 0)
+                                        ).toFixed(2)}
+                                    </Typography>
+                                </Box>
+                            </Box>
+                        )}
 
                         <Divider sx={{ mb: 4 }} />
 
