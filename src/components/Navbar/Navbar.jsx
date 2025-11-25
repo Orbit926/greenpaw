@@ -1,6 +1,6 @@
-import React from 'react';
-import { AppBar, Toolbar, Typography, Button, IconButton, Badge, Box, Container } from '@mui/material';
-import { ShoppingCart, Menu as MenuIcon, Pets } from '@mui/icons-material';
+import React, { useState } from 'react';
+import { AppBar, Toolbar, Typography, Button, IconButton, Badge, Box, Container, Drawer, List, ListItem, ListItemButton, ListItemText, Divider } from '@mui/material';
+import { ShoppingCart, Menu as MenuIcon, Pets, Close } from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import { motion } from 'framer-motion';
@@ -8,6 +8,19 @@ import { motion } from 'framer-motion';
 const Navbar = () => {
     const { cartCount, openCart } = useCart();
     const navigate = useNavigate();
+    const [drawerOpen, setDrawerOpen] = useState(false);
+
+    const toggleDrawer = (open) => (event) => {
+        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+            return;
+        }
+        setDrawerOpen(open);
+    };
+
+    const handleNavigation = (path) => {
+        setDrawerOpen(false);
+        navigate(path);
+    };
 
     return (
         <AppBar position="sticky" color="inherit" elevation={0} sx={{ borderBottom: '1px solid rgba(0,0,0,0.05)', backdropFilter: 'blur(20px)', backgroundColor: 'rgba(255,255,255,0.8)' }}>
@@ -34,12 +47,82 @@ const Navbar = () => {
                                 <ShoppingCart />
                             </Badge>
                         </IconButton>
-                        <IconButton sx={{ display: { xs: 'flex', md: 'none' } }}>
+                        <IconButton 
+                            sx={{ display: { xs: 'flex', md: 'none' } }}
+                            onClick={toggleDrawer(true)}
+                            color="primary"
+                        >
                             <MenuIcon />
                         </IconButton>
                     </Box>
                 </Toolbar>
             </Container>
+
+            {/* Mobile Drawer */}
+            <Drawer
+                anchor="right"
+                open={drawerOpen}
+                onClose={toggleDrawer(false)}
+            >
+                <Box
+                    sx={{ width: 280 }}
+                    role="presentation"
+                >
+                    {/* Header */}
+                    <Box sx={{ 
+                        p: 2, 
+                        display: 'flex', 
+                        justifyContent: 'space-between', 
+                        alignItems: 'center',
+                        borderBottom: '1px solid rgba(0,0,0,0.1)'
+                    }}>
+                        <Box sx={{ display: 'flex', alignItems: 'center', color: 'primary.main' }}>
+                            <Pets sx={{ mr: 1, fontSize: 28 }} />
+                            <Typography variant="h6" fontWeight="700" color="primary.dark">
+                                Greenpaw
+                            </Typography>
+                        </Box>
+                        <IconButton onClick={toggleDrawer(false)} size="small">
+                            <Close />
+                        </IconButton>
+                    </Box>
+
+                    {/* Navigation Links */}
+                    <List sx={{ pt: 2 }}>
+                        <ListItem disablePadding>
+                            <ListItemButton onClick={() => handleNavigation('/')}>
+                                <ListItemText 
+                                    primary="Inicio" 
+                                    primaryTypographyProps={{ 
+                                        fontWeight: 500,
+                                        fontSize: '1.1rem'
+                                    }}
+                                />
+                            </ListItemButton>
+                        </ListItem>
+                        <ListItem disablePadding>
+                            <ListItemButton onClick={() => handleNavigation('/products')}>
+                                <ListItemText 
+                                    primary="Productos" 
+                                    primaryTypographyProps={{ 
+                                        fontWeight: 500,
+                                        fontSize: '1.1rem'
+                                    }}
+                                />
+                            </ListItemButton>
+                        </ListItem>
+                    </List>
+
+                    <Divider sx={{ my: 2 }} />
+
+                    {/* Footer */}
+                    <Box sx={{ p: 2 }}>
+                        <Typography variant="caption" color="text.secondary">
+                            Greenpaw - Solución Ecológica
+                        </Typography>
+                    </Box>
+                </Box>
+            </Drawer>
         </AppBar>
     );
 };
