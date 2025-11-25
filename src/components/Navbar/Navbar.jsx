@@ -25,7 +25,6 @@ const Navbar = () => {
                     <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 4 }}>
                         <Button component={Link} to="/" color="inherit" sx={{ fontSize: '1rem' }}>Inicio</Button>
                         <Button component={Link} to="/products" color="inherit" sx={{ fontSize: '1rem' }}>Productos</Button>
-                        <Button component={Link} to="/products?cat=about" color="inherit" sx={{ fontSize: '1rem' }}>Nosotros</Button>
                     </Box>
 
                     {/* Actions */}

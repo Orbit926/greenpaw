@@ -50,6 +50,7 @@ const CTASection = () => {
                         <Typography
                             variant="h2"
                             sx={{
+                                color: 'white',
                                 fontWeight: 800,
                                 fontSize: { xs: '2rem', md: '3.5rem' },
                                 mb: 3,
@@ -244,7 +245,7 @@ const CTASection = () => {
                         }}
                     >
                         <Grid size={{ xs: 6, md: 3 }}>
-                            <Typography variant="h3" fontWeight="bold">
+                            <Typography variant="h3" fontWeight="bold" sx={{ color: 'white' }}>
                                 100%
                             </Typography>
                             <Typography variant="body2" sx={{ opacity: 0.9, mt: 1 }}>
@@ -252,7 +253,7 @@ const CTASection = () => {
                             </Typography>
                         </Grid>
                         <Grid size={{ xs: 6, md: 3 }}>
-                            <Typography variant="h3" fontWeight="bold">
+                            <Typography variant="h3" fontWeight="bold" sx={{ color: 'white' }}>
                                 1,500+
                             </Typography>
                             <Typography variant="body2" sx={{ opacity: 0.9, mt: 1 }}>
@@ -260,7 +261,7 @@ const CTASection = () => {
                             </Typography>
                         </Grid>
                         <Grid size={{ xs: 6, md: 3 }}>
-                            <Typography variant="h3" fontWeight="bold">
+                            <Typography variant="h3" fontWeight="bold" sx={{ color: 'white' }}>
                                 5.0
                             </Typography>
                             <Typography variant="body2" sx={{ opacity: 0.9, mt: 1 }}>
@@ -268,7 +269,7 @@ const CTASection = () => {
                             </Typography>
                         </Grid>
                         <Grid size={{ xs: 6, md: 3 }}>
-                            <Typography variant="h3" fontWeight="bold">
+                            <Typography variant="h3" fontWeight="bold" sx={{ color: 'white' }}>
                                 24/7
                             </Typography>
                             <Typography variant="body2" sx={{ opacity: 0.9, mt: 1 }}>

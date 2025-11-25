@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Container, Typography, Grid, Card, CardContent } from '@mui/material';
-import { motion } from 'framer-motion';
+import { color, motion } from 'framer-motion';
 import { Recycling, WaterDrop, Forest, Public } from '@mui/icons-material';
 
 const EcoFriendlySection = () => {
@@ -174,7 +174,7 @@ const EcoFriendlySection = () => {
                     >
                         <Grid container spacing={4}>
                             <Grid size={{ xs: 12, md: 4 }}>
-                                <Typography variant="h3" fontWeight="bold" gutterBottom>
+                                <Typography variant="h3" fontWeight="bold" gutterBottom sx={{ color: 'white' }}>
                                     2kg+
                                 </Typography>
                                 <Typography variant="body1" sx={{ opacity: 0.9 }}>
@@ -182,7 +182,7 @@ const EcoFriendlySection = () => {
                                 </Typography>
                             </Grid>
                             <Grid size={{ xs: 12, md: 4 }}>
-                                <Typography variant="h3" fontWeight="bold" gutterBottom>
+                                <Typography variant="h3" fontWeight="bold" gutterBottom sx={{ color: 'white' }}>
                                     100%
                                 </Typography>
                                 <Typography variant="body1" sx={{ opacity: 0.9 }}>
@@ -190,7 +190,7 @@ const EcoFriendlySection = () => {
                                 </Typography>
                             </Grid>
                             <Grid size={{ xs: 12, md: 4 }}>
-                                <Typography variant="h3" fontWeight="bold" gutterBottom>
+                                <Typography variant="h3" fontWeight="bold" gutterBottom sx={{ color: 'white' }}>
                                     0%
                                 </Typography>
                                 <Typography variant="body1" sx={{ opacity: 0.9 }}>

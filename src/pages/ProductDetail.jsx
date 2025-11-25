@@ -136,14 +136,14 @@ const ProductDetail = () => {
         // Agregar producto principal
         addToCart(product, quantity);
         
-        // Agregar complementos seleccionados
+        // Agregar complementos seleccionados con la misma cantidad que el producto principal
         selectedComplements.forEach(complementId => {
             const complement = complementProducts.find(c => c.id === complementId);
             if (complement) {
                 addToCart({
                     ...complement,
                     images: [complement.imageUrl]
-                }, 1);
+                }, quantity);  // Usa la misma cantidad que el producto principal
             }
         });
         
@@ -269,10 +269,10 @@ const ProductDetail = () => {
                                     .map(complement => (
                                         <Box key={complement.id} sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
                                             <Typography variant="body2" color="text.secondary">
-                                                {complement.title}
+                                                {complement.title} (x{quantity})
                                             </Typography>
                                             <Typography variant="body2" fontWeight="medium">
-                                                +${complement.price.toFixed(2)}
+                                                +${(complement.price * quantity).toFixed(2)}
                                             </Typography>
                                         </Box>
                                     ))
@@ -287,7 +287,7 @@ const ProductDetail = () => {
                                             product.price * quantity +
                                             complementProducts
                                                 .filter(c => selectedComplements.includes(c.id))
-                                                .reduce((sum, c) => sum + c.price, 0)
+                                                .reduce((sum, c) => sum + (c.price * quantity), 0)
                                         ).toFixed(2)}
                                     </Typography>
                                 </Box>

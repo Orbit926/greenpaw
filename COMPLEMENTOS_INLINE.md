@@ -115,7 +115,28 @@ const complementProducts = React.useMemo(() => {
 const { getProductById, products } = useProducts();
 ```
 
-### 2. Filtrar complementos por tags:
+### 2. Cantidad de complementos:
+
+**IMPORTANTE:** Los complementos se agregan con la **misma cantidad** que el producto principal.
+
+**Ejemplo:**
+- Usuario selecciona: Módulo x2 + Rueditas
+- Se agrega al carrito: 2 Módulos + 2 Rueditas ✅
+
+```javascript
+const handleAddToCart = () => {
+  addToCart(product, quantity);
+  
+  selectedComplements.forEach(complementId => {
+    const complement = complementProducts.find(c => c.id === complementId);
+    if (complement) {
+      addToCart(complement, quantity);  // ← Misma cantidad
+    }
+  });
+};
+```
+
+### 3. Filtrar complementos por tags:
 
 ```javascript
 const complementProducts = useMemo(() => {
@@ -221,6 +242,7 @@ Para que un producto sea complemento:
 - [x] Sistema de tags implementado
 - [x] Mostrar precio de cada complemento
 - [x] Mostrar resumen de precio total
+- [x] Complementos se agregan con misma cantidad que producto principal
 - [ ] Testing con productos reales de Shopify
 
 ---
