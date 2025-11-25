@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Container, Typography, Grid, Button } from '@mui/material';
-import { Helmet } from 'react-helmet-async';
 import Hero from '../components/Hero/Hero';
 import CategoryBanner from '../components/CategoryBanner/CategoryBanner';
 import ProductCard from '../components/ProductCard/ProductCard';
@@ -18,13 +17,12 @@ const reviews = [
 const Home = () => {
     const featuredProducts = products.slice(0, 3);
 
+    useEffect(() => {
+        document.title = 'Greenpaw | Pasto Ecológico para Mascotas';
+    }, []);
+
     return (
         <>
-            <Helmet>
-                <title>Greenpaw | Pasto Ecológico para Mascotas</title>
-                <meta name="description" content="Pasto para mascotas hecho con plástico 100% reciclado. Ecológico, higiénico y moderno." />
-            </Helmet>
-
             <Hero />
 
             <Container maxWidth="lg" sx={{ py: 8 }}>

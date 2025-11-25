@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Box, Container, Typography, Grid, Button, Chip, Rating, Divider, IconButton } from '@mui/material';
 import { Add, Remove, ArrowBack } from '@mui/icons-material';
-import { Helmet } from 'react-helmet-async';
 import { useCart } from '../context/CartContext';
 import productsData from '../data/products.json';
 import { motion } from 'framer-motion';
@@ -29,13 +28,12 @@ const ProductDetail = () => {
         openCart();
     };
 
+    useEffect(() => {
+        document.title = `${product.title} | Greenpaw`;
+    }, [product.title]);
+
     return (
         <Container maxWidth="lg" sx={{ py: 8 }}>
-            <Helmet>
-                <title>{product.title} | Greenpaw</title>
-                <meta name="description" content={product.description} />
-            </Helmet>
-
             <Button startIcon={<ArrowBack />} onClick={() => navigate(-1)} sx={{ mb: 4 }}>
                 Volver
             </Button>

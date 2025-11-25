@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Container, Typography, Grid, TextField, Button, Paper, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel } from '@mui/material';
-import { Helmet } from 'react-helmet-async';
 import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 
@@ -18,6 +17,10 @@ const Checkout = () => {
         }, 1500);
     };
 
+    useEffect(() => {
+        document.title = 'Checkout | Greenpaw';
+    }, []);
+
     if (cart.length === 0) {
         navigate('/cart');
         return null;
@@ -25,8 +28,6 @@ const Checkout = () => {
 
     return (
         <Container maxWidth="lg" sx={{ py: 8 }}>
-            <Helmet><title>Checkout | Greenpaw</title></Helmet>
-
             <Typography variant="h3" fontWeight="bold" gutterBottom sx={{ mb: 6 }}>
                 Finalizar Compra
             </Typography>

@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Container, Typography, Grid, Button, IconButton, Divider, Paper } from '@mui/material';
 import { Add, Remove, Delete, ArrowBack } from '@mui/icons-material';
-import { Helmet } from 'react-helmet-async';
 import { useCart } from '../context/CartContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -10,10 +9,13 @@ const Cart = () => {
     const { cart, updateQuantity, removeFromCart, cartTotal, clearCart } = useCart();
     const navigate = useNavigate();
 
+    useEffect(() => {
+        document.title = 'Carrito | Greenpaw';
+    }, []);
+
     if (cart.length === 0) {
         return (
             <Container maxWidth="md" sx={{ py: 10, textAlign: 'center' }}>
-                <Helmet><title>Carrito | Greenpaw</title></Helmet>
                 <Typography variant="h4" gutterBottom>Tu carrito está vacío</Typography>
                 <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
                     Parece que aún no has agregado productos.
@@ -27,8 +29,6 @@ const Cart = () => {
 
     return (
         <Container maxWidth="lg" sx={{ py: 8 }}>
-            <Helmet><title>Carrito | Greenpaw</title></Helmet>
-
             <Typography variant="h3" fontWeight="bold" gutterBottom>
                 Carrito de Compras
             </Typography>

@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Container, Typography, Button } from '@mui/material';
 import { CheckCircle } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Helmet } from 'react-helmet-async';
 
 const Success = () => {
     const orderId = Math.floor(Math.random() * 1000000);
 
+    useEffect(() => {
+        document.title = '¡Gracias! | Greenpaw';
+    }, []);
+
     return (
         <Container maxWidth="sm" sx={{ py: 12, textAlign: 'center' }}>
-            <Helmet><title>¡Gracias! | Greenpaw</title></Helmet>
-
             <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}

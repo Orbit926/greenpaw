@@ -1,6 +1,5 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Box, Container, Typography, Grid, TextField, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
-import { Helmet } from 'react-helmet-async';
 import ProductCard from '../components/ProductCard/ProductCard';
 import productsData from '../data/products.json';
 import { useSearchParams } from 'react-router-dom';
@@ -46,13 +45,12 @@ const Products = () => {
         }
     };
 
+    useEffect(() => {
+        document.title = 'Catálogo | Greenpaw';
+    }, []);
+
     return (
         <Container maxWidth="lg" sx={{ py: 8 }}>
-            <Helmet>
-                <title>Catálogo | Greenpaw</title>
-                <meta name="description" content="Explora nuestra colección de pasto ecológico para mascotas." />
-            </Helmet>
-
             <Typography variant="h3" fontWeight="bold" gutterBottom>
                 Catálogo
             </Typography>
