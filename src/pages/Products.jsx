@@ -63,7 +63,7 @@ const Products = () => {
                 Catálogo
             </Typography>
 
-            {/* Filters */}
+            {/* Filters
             <Box sx={{ mb: 6, display: 'flex', gap: 2, flexWrap: 'wrap' }}>
                 <TextField
                     label="Buscar"
@@ -100,7 +100,7 @@ const Products = () => {
                         <MenuItem value="price-desc">Precio: Mayor a Menor</MenuItem>
                     </Select>
                 </FormControl>
-            </Box>
+            </Box> */}
 
             {/* Grid */}
             <Grid container spacing={4}>

@@ -9,7 +9,7 @@ const GET_PRODUCTS_QUERY = `
           handle
           title
           description
-          images(first: 1) {
+          images(first: 10) {
             edges {
               node {
                 url
@@ -34,9 +34,46 @@ const GET_PRODUCTS_QUERY = `
   }
 `;
 
+// Función para transformar producto de Shopify al formato de la app
+function transformShopifyProduct(shopifyProduct) {
+  const numericId = parseInt(shopifyProduct.id.split('/').pop());
+  const variant = shopifyProduct.variants.edges[0]?.node;
+  const images = shopifyProduct.images.edges.map(edge => edge.node.url);
+  
+  // Detectar categoría basada en el título
+  let category = 'Productos';
+  if (shopifyProduct.title.toLowerCase().includes('repuesto') || 
+      shopifyProduct.title.toLowerCase().includes('mantenimiento')) {
+    category = 'Mantenimiento';
+  } else if (shopifyProduct.title.toLowerCase().includes('rueda') || 
+             shopifyProduct.title.toLowerCase().includes('llanta')) {
+    category = 'Accesorios';
+  } else if (shopifyProduct.title.toLowerCase().includes('módulo') || 
+             shopifyProduct.title.toLowerCase().includes('modulo')) {
+    category = 'Módulos';
+  }
+  
+  return {
+    id: numericId,
+    title: shopifyProduct.title,
+    price: parseFloat(variant?.price.amount || 0),
+    description: shopifyProduct.description || '',
+    images: images.length > 0 ? images : ['https://via.placeholder.com/400'],
+    variantId: variant?.id, // Necesario para agregar al carrito de Shopify
+    currency: variant?.price.currencyCode || 'MXN',
+    handle: shopifyProduct.handle,
+    stock: 100, // Shopify Storefront API no devuelve inventario
+    category: category,
+    ecoScore: 95, // Valor por defecto para todos los productos
+    features: [], // Shopify no tiene features en Storefront API
+    sizes: ['Único'], // Valores por defecto
+  };
+}
+
 export async function getProducts(first = 20) {
   const response = await shopifyClient.query(GET_PRODUCTS_QUERY, { first });
-  return response.data.products.edges.map(edge => edge.node);
+  const shopifyProducts = response.data.products.edges.map(edge => edge.node);
+  return shopifyProducts.map(transformShopifyProduct);
 }
 
 export async function getProductById(id) {
@@ -72,5 +109,5 @@ export async function getProductById(id) {
   `;
   
   const response = await shopifyClient.query(GET_PRODUCT_QUERY, { id });
-  return response.data.product;
+  return transformShopifyProduct(response.data.product);
 }
