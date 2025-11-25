@@ -1,20 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Container, Typography, Grid, TextField, Button, Paper, Radio, RadioGroup, FormControlLabel, FormControl, FormLabel } from '@mui/material';
+import { Box, Container, Typography, Button, Paper, CircularProgress } from '@mui/material';
 import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
+import { goToShopifyCheckout } from '../services/checkout';
 
 const Checkout = () => {
-    const { cart, cartTotal, clearCart } = useCart();
+    const { cart, cartTotal } = useCart();
     const navigate = useNavigate();
-    const [paymentMethod, setPaymentMethod] = useState('card');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Simulate API call
-        setTimeout(() => {
-            clearCart();
-            navigate('/success');
-        }, 1500);
+    const handleSubmit = async () => {
+        setLoading(true);
+        setError(null);
+        
+        try {
+            // Redirigir a Shopify para completar el pago
+            await goToShopifyCheckout(cart);
+            // El usuario será redirigido automáticamente
+            // No llegará aquí porque la página cambia
+        } catch (err) {
+            console.error('Error al crear checkout:', err);
+            setError(err.message || 'Hubo un problema al procesar tu pedido. Por favor intenta de nuevo.');
+            setLoading(false);
+        }
     };
 
     useEffect(() => {
@@ -27,95 +36,67 @@ const Checkout = () => {
     }
 
     return (
-        <Container maxWidth="lg" sx={{ py: 8 }}>
-            <Typography variant="h3" fontWeight="bold" gutterBottom sx={{ mb: 6 }}>
+        <Container maxWidth="md" sx={{ py: 8 }}>
+            <Typography variant="h3" fontWeight="bold" gutterBottom sx={{ mb: 2 }}>
                 Finalizar Compra
             </Typography>
+            <Typography variant="body1" color="text.secondary" sx={{ mb: 6 }}>
+                Serás redirigido a nuestro checkout seguro para completar tu compra
+            </Typography>
 
-            <form onSubmit={handleSubmit}>
-                <Grid container spacing={6}>
-                    <Grid size={{ xs: 12, md: 7 }}>
-                        <Paper sx={{ p: 4, mb: 4 }}>
-                            <Typography variant="h6" fontWeight="bold" gutterBottom>Información de Envío</Typography>
-                            <Grid container spacing={3}>
-                                <Grid size={{ xs: 12, sm: 6 }}>
-                                    <TextField label="Nombre" fullWidth required />
-                                </Grid>
-                                <Grid size={{ xs: 12, sm: 6 }}>
-                                    <TextField label="Apellido" fullWidth required />
-                                </Grid>
-                                <Grid size={{ xs: 12 }}>
-                                    <TextField label="Dirección" fullWidth required />
-                                </Grid>
-                                <Grid size={{ xs: 12, sm: 6 }}>
-                                    <TextField label="Ciudad" fullWidth required />
-                                </Grid>
-                                <Grid size={{ xs: 12, sm: 6 }}>
-                                    <TextField label="Código Postal" fullWidth required />
-                                </Grid>
-                                <Grid size={{ xs: 12 }}>
-                                    <TextField label="Teléfono" fullWidth required />
-                                </Grid>
-                            </Grid>
-                        </Paper>
-
-                        <Paper sx={{ p: 4 }}>
-                            <Typography variant="h6" fontWeight="bold" gutterBottom>Método de Pago</Typography>
-                            <FormControl>
-                                <RadioGroup
-                                    value={paymentMethod}
-                                    onChange={(e) => setPaymentMethod(e.target.value)}
-                                >
-                                    <FormControlLabel value="card" control={<Radio />} label="Tarjeta de Crédito / Débito" />
-                                    <FormControlLabel value="paypal" control={<Radio />} label="PayPal" />
-                                </RadioGroup>
-                            </FormControl>
-
-                            {paymentMethod === 'card' && (
-                                <Grid container spacing={3} sx={{ mt: 2 }}>
-                                    <Grid size={{ xs: 12 }}>
-                                        <TextField label="Número de Tarjeta" fullWidth required />
-                                    </Grid>
-                                    <Grid size={{ xs: 6 }}>
-                                        <TextField label="Fecha Exp." placeholder="MM/YY" fullWidth required />
-                                    </Grid>
-                                    <Grid size={{ xs: 6 }}>
-                                        <TextField label="CVC" fullWidth required />
-                                    </Grid>
-                                </Grid>
-                            )}
-                        </Paper>
-                    </Grid>
-
-                    <Grid size={{ xs: 12, md: 5 }}>
-                        <Paper sx={{ p: 4, position: 'sticky', top: 100, bgcolor: 'primary.dark', color: 'white' }}>
-                            <Typography variant="h6" fontWeight="bold" gutterBottom>Resumen del Pedido</Typography>
-                            <Box sx={{ mb: 4 }}>
-                                {cart.map((item) => (
-                                    <Box key={item.id} sx={{ display: 'flex', justifyContent: 'space-between', mb: 1, opacity: 0.9 }}>
-                                        <Typography variant="body2">{item.quantity}x {item.title}</Typography>
-                                        <Typography variant="body2">${(item.price * item.quantity).toFixed(2)}</Typography>
-                                    </Box>
-                                ))}
+            <Paper sx={{ p: 4, bgcolor: 'primary.dark', color: 'white' }}>
+                <Typography variant="h5" fontWeight="bold" gutterBottom>
+                    Resumen del Pedido
+                </Typography>
+                
+                <Box sx={{ my: 4 }}>
+                    {cart.map((item) => (
+                        <Box key={item.id} sx={{ display: 'flex', justifyContent: 'space-between', mb: 2, pb: 2, borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+                            <Box>
+                                <Typography variant="body1" fontWeight="bold">{item.title}</Typography>
+                                <Typography variant="body2" sx={{ opacity: 0.8 }}>Cantidad: {item.quantity}</Typography>
                             </Box>
-                            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 4, pt: 2, borderTop: '1px solid rgba(255,255,255,0.2)' }}>
-                                <Typography variant="h5" fontWeight="bold">Total</Typography>
-                                <Typography variant="h5" fontWeight="bold">${cartTotal.toFixed(2)}</Typography>
-                            </Box>
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                color="secondary"
-                                fullWidth
-                                size="large"
-                                sx={{ bgcolor: 'white', color: 'primary.dark', '&:hover': { bgcolor: 'grey.100' } }}
-                            >
-                                Pagar Ahora
-                            </Button>
-                        </Paper>
-                    </Grid>
-                </Grid>
-            </form>
+                            <Typography variant="body1" fontWeight="bold">
+                                ${(item.price * item.quantity).toFixed(2)}
+                            </Typography>
+                        </Box>
+                    ))}
+                </Box>
+
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 4, pt: 3, borderTop: '2px solid rgba(255,255,255,0.3)' }}>
+                    <Typography variant="h4" fontWeight="bold">Total</Typography>
+                    <Typography variant="h4" fontWeight="bold">${cartTotal.toFixed(2)}</Typography>
+                </Box>
+
+                {error && (
+                    <Typography color="error" variant="body2" sx={{ mb: 2, bgcolor: 'white', p: 2, borderRadius: 1 }}>
+                        {error}
+                    </Typography>
+                )}
+
+                <Button
+                    onClick={handleSubmit}
+                    variant="contained"
+                    color="secondary"
+                    fullWidth
+                    size="large"
+                    disabled={loading}
+                    sx={{ 
+                        bgcolor: 'white', 
+                        color: 'primary.dark', 
+                        py: 2,
+                        fontSize: '1.1rem',
+                        fontWeight: 'bold',
+                        '&:hover': { bgcolor: 'grey.100' } 
+                    }}
+                >
+                    {loading ? <CircularProgress size={24} /> : 'Proceder al Pago'}
+                </Button>
+
+                <Typography variant="caption" sx={{ display: 'block', mt: 2, textAlign: 'center', opacity: 0.8 }}>
+                    Pago seguro procesado por Shopify
+                </Typography>
+            </Paper>
         </Container>
     );
 };

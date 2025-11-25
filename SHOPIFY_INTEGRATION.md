@@ -1,5 +1,16 @@
 # Integración con Shopify
 
+## ⚡ Cart API Moderna (2024-2025)
+
+Este proyecto usa el **Cart API** moderno de Shopify, NO el flujo deprecado de `checkoutCreate`.
+
+### Mutaciones utilizadas:
+- ✅ `cartCreate` - Crear carrito
+- ✅ `cartLinesAdd` - Agregar productos
+- ✅ `cartLinesUpdate` - Actualizar cantidades
+- ✅ `cartLinesRemove` - Remover productos
+- ✅ `checkoutUrl` - URL de redirección
+
 ## Configuración
 
 ### 1. Variables de Entorno
