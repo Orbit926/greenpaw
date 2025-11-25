@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Container, Typography, Grid, Card, CardContent, Avatar, Rating } from '@mui/material';
 import { motion } from 'framer-motion';
 import { FormatQuote } from '@mui/icons-material';
+import siteConfig from '../config/siteConfig';
 
 const TestimonialsSection = () => {
     const testimonials = [
@@ -216,10 +217,10 @@ const TestimonialsSection = () => {
                         }}
                     >
                         <Typography variant="h4" fontWeight="bold" gutterBottom color="success.dark">
-                            +1,500 Familias Felices
+                            {siteConfig.stats.happyCustomers} Familias Felices
                         </Typography>
                         <Typography variant="body1" color="text.secondary">
-                            Únete a la comunidad Greenpaw y transforma la vida de tu mascota
+                            Únete a la comunidad {siteConfig.company.name} y transforma la vida de tu mascota
                         </Typography>
                     </Box>
                 </motion.div>

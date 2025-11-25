@@ -3,6 +3,7 @@ import { Box, Container, Typography, Button, Grid } from '@mui/material';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ShoppingCart, CalendarMonth, Explore, ArrowForward } from '@mui/icons-material';
+import siteConfig from '../config/siteConfig';
 
 const CTASection = () => {
     return (
@@ -246,7 +247,7 @@ const CTASection = () => {
                     >
                         <Grid size={{ xs: 6, md: 3 }}>
                             <Typography variant="h3" fontWeight="bold" sx={{ color: 'white' }}>
-                                100%
+                                {siteConfig.stats.ecoFriendlyPercentage}
                             </Typography>
                             <Typography variant="body2" sx={{ opacity: 0.9, mt: 1 }}>
                                 Eco-Friendly
@@ -254,7 +255,7 @@ const CTASection = () => {
                         </Grid>
                         <Grid size={{ xs: 6, md: 3 }}>
                             <Typography variant="h3" fontWeight="bold" sx={{ color: 'white' }}>
-                                1,500+
+                                {siteConfig.stats.happyCustomers}
                             </Typography>
                             <Typography variant="body2" sx={{ opacity: 0.9, mt: 1 }}>
                                 Clientes Felices
@@ -262,7 +263,7 @@ const CTASection = () => {
                         </Grid>
                         <Grid size={{ xs: 6, md: 3 }}>
                             <Typography variant="h3" fontWeight="bold" sx={{ color: 'white' }}>
-                                5.0
+                                {siteConfig.stats.averageRating}
                             </Typography>
                             <Typography variant="body2" sx={{ opacity: 0.9, mt: 1 }}>
                                 Calificación Promedio
@@ -270,7 +271,7 @@ const CTASection = () => {
                         </Grid>
                         <Grid size={{ xs: 6, md: 3 }}>
                             <Typography variant="h3" fontWeight="bold" sx={{ color: 'white' }}>
-                                24/7
+                                {siteConfig.stats.supportHours}
                             </Typography>
                             <Typography variant="body2" sx={{ opacity: 0.9, mt: 1 }}>
                                 Soporte al Cliente
