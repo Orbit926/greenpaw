@@ -9,6 +9,7 @@ import Checkout from '../pages/Checkout';
 import Success from '../pages/Success';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
+import ScrollToTop from '../components/ScrollToTop';
 import { Box } from '@mui/material';
 
 const AppRouter = () => {
@@ -16,6 +17,7 @@ const AppRouter = () => {
 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+            <ScrollToTop />
             <Navbar />
             <Box sx={{ flexGrow: 1 }}>
                 <AnimatePresence mode="wait">

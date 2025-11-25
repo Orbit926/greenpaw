@@ -69,10 +69,13 @@ const MaintenanceSection = () => {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.8 }}
+                            style={{ height: '100%' }}
                         >
                             <Card
                                 sx={{
                                     height: '100%',
+                                    display: 'flex',
+                                    flexDirection: 'column',
                                     borderRadius: 4,
                                     boxShadow: '0 12px 40px rgba(0, 0, 0, 0.08)',
                                     border: '2px solid',
@@ -97,7 +100,12 @@ const MaintenanceSection = () => {
                                         fontWeight: 'bold'
                                     }}
                                 />
-                                <CardContent sx={{ p: 4 }}>
+                                <CardContent sx={{ 
+                                    p: 4,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    flexGrow: 1
+                                }}>
                                     <Box
                                         sx={{
                                             display: 'inline-flex',
@@ -133,7 +141,7 @@ const MaintenanceSection = () => {
                                         cambio completo de tierra y pasto de tu módulo Greenpaw.
                                     </Typography>
 
-                                    <Box sx={{ mb: 4 }}>
+                                    <Box sx={{ mb: 4, flexGrow: 1 }}>
                                         <Typography variant="subtitle2" fontWeight="bold" gutterBottom>
                                             ¿Qué incluye?
                                         </Typography>
@@ -192,10 +200,13 @@ const MaintenanceSection = () => {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.8 }}
+                            style={{ height: '100%' }}
                         >
                             <Card
                                 sx={{
                                     height: '100%',
+                                    display: 'flex',
+                                    flexDirection: 'column',
                                     borderRadius: 4,
                                     boxShadow: '0 8px 24px rgba(0, 0, 0, 0.06)',
                                     border: '1px solid',
@@ -207,7 +218,12 @@ const MaintenanceSection = () => {
                                     }
                                 }}
                             >
-                                <CardContent sx={{ p: 4 }}>
+                                <CardContent sx={{ 
+                                    p: 4,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    flexGrow: 1
+                                }}>
                                     <Box
                                         sx={{
                                             display: 'inline-flex',
@@ -243,7 +259,7 @@ const MaintenanceSection = () => {
                                         para que renueves tu módulo tú mismo, de manera fácil y rápida.
                                     </Typography>
 
-                                    <Box sx={{ mb: 4 }}>
+                                    <Box sx={{ mb: 4, flexGrow: 1 }}>
                                         <Typography variant="subtitle2" fontWeight="bold" gutterBottom>
                                             ¿Qué incluye el kit?
                                         </Typography>

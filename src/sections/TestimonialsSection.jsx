@@ -116,10 +116,13 @@ const TestimonialsSection = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6, delay: index * 0.1 }}
+                                style={{ height: '100%' }}
                             >
                                 <Card
                                     sx={{
                                         height: '100%',
+                                        display: 'flex',
+                                        flexDirection: 'column',
                                         borderRadius: 3,
                                         boxShadow: '0 8px 24px rgba(0, 0, 0, 0.06)',
                                         transition: 'all 0.3s',
@@ -130,7 +133,12 @@ const TestimonialsSection = () => {
                                         }
                                     }}
                                 >
-                                    <CardContent sx={{ p: 4 }}>
+                                    <CardContent sx={{ 
+                                        p: 4,
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        flexGrow: 1
+                                    }}>
                                         {/* Quote Icon */}
                                         <Box
                                             sx={{
@@ -159,14 +167,15 @@ const TestimonialsSection = () => {
                                                 mb: 3,
                                                 color: 'text.primary',
                                                 lineHeight: 1.7,
-                                                fontStyle: 'italic'
+                                                fontStyle: 'italic',
+                                                flexGrow: 1
                                             }}
                                         >
                                             "{testimonial.comment}"
                                         </Typography>
 
                                         {/* Author */}
-                                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mt: 'auto' }}>
                                             <Avatar
                                                 src={testimonial.avatar}
                                                 alt={testimonial.name}

@@ -247,9 +247,52 @@ Para que un producto sea complemento:
 
 ---
 
+## 🔝 Scroll To Top en Navegación
+
+**Problema:** Al cambiar de página, el scroll se mantenía en la posición anterior.
+
+**Solución:** Componente `ScrollToTop` global que resetea el scroll en cada cambio de ruta.
+
+### Implementación:
+
+**Archivo:** `/src/components/ScrollToTop.jsx`
+```javascript
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
+const ScrollToTop = () => {
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
+
+    return null;
+};
+```
+
+**Integrado en:** `/src/router/AppRouter.jsx`
+```javascript
+<Box>
+    <ScrollToTop />  {/* ← Se ejecuta en cada cambio de ruta */}
+    <Navbar />
+    <Routes>...</Routes>
+    <Footer />
+</Box>
+```
+
+✅ **Beneficios:**
+- Funciona automáticamente en todas las rutas
+- No se requiere código en cada página individual
+- Mejora la UX al empezar desde arriba
+
+---
+
 ## 📚 Archivos Modificados
 
 - `src/pages/ProductDetail.jsx` - Sección de complementos inline
+- `src/components/ScrollToTop.jsx` - Componente de scroll automático
+- `src/router/AppRouter.jsx` - Integración de ScrollToTop
 
 **Líneas clave:**
 - L10-69: Componente `ComplementItem`

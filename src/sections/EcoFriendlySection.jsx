@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Container, Typography, Grid, Card, CardContent } from '@mui/material';
-import { color, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Recycling, WaterDrop, Forest, Public } from '@mui/icons-material';
 
 const EcoFriendlySection = () => {
@@ -106,10 +106,13 @@ const EcoFriendlySection = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6, delay: index * 0.1 }}
+                                style={{ height: '100%' }}
                             >
                                 <Card
                                     sx={{
                                         height: '100%',
+                                        display: 'flex',
+                                        flexDirection: 'column',
                                         textAlign: 'center',
                                         borderRadius: 3,
                                         boxShadow: '0 8px 24px rgba(0, 0, 0, 0.06)',
@@ -120,7 +123,12 @@ const EcoFriendlySection = () => {
                                         }
                                     }}
                                 >
-                                    <CardContent sx={{ p: 4 }}>
+                                    <CardContent sx={{ 
+                                        p: 4,
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        flexGrow: 1
+                                    }}>
                                         <Box
                                             sx={{
                                                 display: 'inline-flex',
@@ -128,7 +136,8 @@ const EcoFriendlySection = () => {
                                                 borderRadius: '50%',
                                                 bgcolor: 'success.50',
                                                 color: 'success.main',
-                                                mb: 3
+                                                mb: 3,
+                                                mx: 'auto'
                                             }}
                                         >
                                             {feature.icon}
@@ -144,7 +153,7 @@ const EcoFriendlySection = () => {
                                         <Typography
                                             variant="body2"
                                             color="text.secondary"
-                                            sx={{ lineHeight: 1.7 }}
+                                            sx={{ lineHeight: 1.7, flexGrow: 1 }}
                                         >
                                             {feature.description}
                                         </Typography>

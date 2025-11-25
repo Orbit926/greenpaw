@@ -10,7 +10,6 @@ import CTASection from '../sections/CTASection';
 const Home = () => {
     useEffect(() => {
         document.title = 'Greenpaw | Solución Ecológica para Mascotas';
-        window.scrollTo(0, 0);
     }, []);
 
     return (

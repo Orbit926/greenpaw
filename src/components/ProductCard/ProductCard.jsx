@@ -11,6 +11,7 @@ const ProductCard = ({ product }) => {
         <motion.div
             whileHover={{ y: -10 }}
             transition={{ type: 'spring', stiffness: 300 }}
+            style={{ height: '100%' }}
         >
             <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'visible' }}>
                 {product.ecoScore >= 95 && (
