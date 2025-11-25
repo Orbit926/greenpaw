@@ -9,6 +9,7 @@ const GET_PRODUCTS_QUERY = `
           handle
           title
           description
+          tags
           images(first: 10) {
             edges {
               node {
@@ -58,6 +59,7 @@ function transformShopifyProduct(shopifyProduct) {
     title: shopifyProduct.title,
     price: parseFloat(variant?.price.amount || 0),
     description: shopifyProduct.description || '',
+    tags: shopifyProduct.tags || [],
     images: images.length > 0 ? images : ['https://via.placeholder.com/400'],
     variantId: variant?.id, // Necesario para agregar al carrito de Shopify
     currency: variant?.price.currencyCode || 'MXN',
@@ -84,6 +86,7 @@ export async function getProductById(id) {
         handle
         title
         description
+        tags
         images(first: 10) {
           edges {
             node {

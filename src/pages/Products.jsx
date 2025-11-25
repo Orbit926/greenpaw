@@ -15,6 +15,10 @@ const Products = () => {
     const filteredProducts = useMemo(() => {
         let result = [...products];
 
+        result = result.filter(
+            p => !p.tags?.some(tag => tag.startsWith("complemento"))
+        );
+
         // Filter by category
         if (categoryParam !== 'all') {
             result = result.filter(p => p.category.toLowerCase() === categoryParam.toLowerCase());
