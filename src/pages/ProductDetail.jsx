@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Box, Container, Typography, Grid, Button, Chip, Rating, Divider, IconButton, Checkbox, FormControlLabel, Avatar, Card } from '@mui/material';
-import { Add, Remove, ArrowBack, WhatsApp } from '@mui/icons-material';
+import { Add, Remove, ArrowBack, WhatsApp, Straighten } from '@mui/icons-material';
 import { useCart } from '../context/CartContext';
 import { useProducts } from '../context/ProductsContext';
 import siteConfig from '../config/siteConfig';
+import { Link as RouterLink } from 'react-router-dom';
 
 // Componente para cada item de complemento
 const ComplementItem = ({ complement, selected, onToggle }) => {
@@ -83,15 +84,20 @@ const ProductDetail = () => {
     const [selectedComplements, setSelectedComplements] = useState([]);
 
     const product = getProductById(id);
-    
+
     // Detectar si es el producto especial a medida
     const isCustom = product && (product.isCustom || product.id === 'custom-module');
-    
+
+    // Detectar si el producto tiene la tag "modulo" o "módulo"
+    const isModulo = product && product.tags?.some(tag =>
+        tag.toLowerCase() === 'modulo' || tag.toLowerCase() === 'módulo'
+    );
+
     // Generar link de WhatsApp para cotización
     const whatsappUrl = `https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(
         `Hola, quiero cotizar un módulo Greenpaw a medida con dimensiones personalizadas. Vengo de la tienda en línea.`
     )}`;
-    
+
     const handleWhatsAppClick = () => {
         window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     };
@@ -101,27 +107,27 @@ const ProductDetail = () => {
             document.title = `${product.title} | Greenpaw`;
         }
     }, [product?.title]);
-    
+
     // Obtener complementos filtrando por tags "complemento-{tag-del-producto}"
     const complementProducts = React.useMemo(() => {
         if (!products || !product || !product.tags) return [];
-        
+
         // Buscar tags del producto actual que NO empiecen con "complemento-"
         const productTags = product.tags.filter(tag => !tag.startsWith('complemento-'));
-        
+
         // Filtrar productos que tengan tags "complemento-{tag-del-producto-actual}"
         return products
             .filter(p => {
                 // No incluir el producto actual
                 if (p.id === product.id) return false;
-                
+
                 // Verificar si tiene alguna tag "complemento-{tag}"
                 return p.tags?.some(tag => {
                     if (!tag.startsWith('complemento-')) return false;
-                    
+
                     // Extraer el tag sin el prefijo "complemento-"
                     const complementTag = tag.replace('complemento-', '');
-                    
+
                     // Verificar si coincide con alguna tag del producto actual
                     return productTags.includes(complementTag);
                 });
@@ -148,7 +154,7 @@ const ProductDetail = () => {
     const handleAddToCart = () => {
         // Agregar producto principal
         addToCart(product, quantity);
-        
+
         // Agregar complementos seleccionados con la misma cantidad que el producto principal
         selectedComplements.forEach(complementId => {
             const complement = complementProducts.find(c => c.id === complementId);
@@ -159,7 +165,7 @@ const ProductDetail = () => {
                 }, quantity);  // Usa la misma cantidad que el producto principal
             }
         });
-        
+
         openCart();
     };
 
@@ -169,37 +175,55 @@ const ProductDetail = () => {
                 Volver
             </Button>
 
-            <Grid container spacing={6}>
-                {/* Images */}
+            <Grid container spacing={8}>
+                {/* Images - Sticky en desktop */}
                 <Grid size={{ xs: 12, md: 6 }}>
-                    <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
-                        <Box
-                            component="img"
-                            src={product.images[0]}
-                            alt={product.title}
-                            sx={{
-                                width: '100%',
-                                borderRadius: 4,
-                                boxShadow: '0 10px 30px rgba(0,0,0,0.1)'
-                            }}
-                        />
-                        <Box sx={{ display: 'flex', gap: 2, mt: 2 }}>
-                            {product.images.map((img, index) => (
+                    <Box
+                        sx={{
+                            position: { xs: 'static', md: 'sticky' },
+                            top: { md: 100 }
+                        }}
+                    >
+                        <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
+                            <Box
+                                sx={{
+                                    borderRadius: 3,
+                                    overflow: 'hidden',
+                                    border: '1px solid',
+                                    borderColor: 'divider',
+                                    backgroundColor: 'grey.50',
+                                    boxShadow: '0 10px 30px rgba(0,0,0,0.08)'
+                                }}
+                            >
                                 <Box
-                                    key={index}
                                     component="img"
-                                    src={img}
+                                    src={product.images[0]}
+                                    alt={product.title}
                                     sx={{
-                                        width: 80,
-                                        height: 80,
-                                        borderRadius: 2,
-                                        cursor: 'pointer',
-                                        border: index === 0 ? '2px solid #4CAF50' : 'none'
+                                        width: '100%',
+                                        height: 'auto',
+                                        display: 'block'
                                     }}
                                 />
-                            ))}
-                        </Box>
-                    </motion.div>
+                            </Box>
+                            <Box sx={{ display: 'flex', gap: 2, mt: 2 }}>
+                                {product.images.map((img, index) => (
+                                    <Box
+                                        key={index}
+                                        component="img"
+                                        src={img}
+                                        sx={{
+                                            width: 80,
+                                            height: 80,
+                                            borderRadius: 2,
+                                            cursor: 'pointer',
+                                            border: index === 0 ? '2px solid #4CAF50' : 'none'
+                                        }}
+                                    />
+                                ))}
+                            </Box>
+                        </motion.div>
+                    </Box>
                 </Grid>
 
                 {/* Info */}
@@ -228,23 +252,77 @@ const ProductDetail = () => {
                                 ${product.price}
                             </Typography>
                         ) : (
-                            <Chip 
-                                label="Precio por cotización" 
-                                color="success" 
-                                sx={{ mb: 3, fontSize: '1rem', py: 2.5, px: 1 }} 
+                            <Chip
+                                label="Precio por cotización"
+                                color="success"
+                                sx={{ mb: 3, fontSize: '1rem', py: 2.5, px: 1 }}
                             />
                         )}
 
                         <Typography variant="body1" paragraph sx={{ mb: 4 }}>
                             {product.description}
                         </Typography>
-                        
+
+                        {/* Mensaje para módulos estándar sugiriendo el módulo a medida */}
+                        {!isCustom && isModulo && (
+                            <Box
+                                sx={{
+                                    mb: 4,
+                                    p: 3,
+                                    background: 'linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%)',
+                                    borderRadius: 3,
+                                    border: '2px solid',
+                                    borderColor: 'success.light',
+                                    display: 'flex',
+                                    gap: 2,
+                                    alignItems: 'start',
+                                    boxShadow: '0 4px 12px rgba(76, 175, 80, 0.1)'
+                                }}
+                            >
+                                <Box
+                                    sx={{
+                                        bgcolor: 'success.main',
+                                        color: 'white',
+                                        borderRadius: 2,
+                                        p: 1.5,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        minWidth: 48,
+                                        height: 48
+                                    }}
+                                >
+                                    <Straighten sx={{ fontSize: 28 }} />
+                                </Box>
+                                <Box sx={{ flex: 1 }}>
+                                    <Typography variant="h6" fontWeight="bold" gutterBottom color="success.dark">
+                                        ¿Necesitas medidas diferentes?
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary" paragraph sx={{ mb: 2 }}>
+                                        Este módulo tiene dimensiones estándar, pero si tu espacio requiere medidas específicas,
+                                        podemos fabricar un módulo personalizado perfecto para ti.
+                                    </Typography>
+                                    <Button
+                                        component={RouterLink}
+                                        to="/products/custom-module"
+                                        variant="contained"
+                                        color="success"
+                                        size="small"
+                                        startIcon={<Straighten />}
+                                        sx={{ fontWeight: 'bold' }}
+                                    >
+                                        Ver módulo a medida
+                                    </Button>
+                                </Box>
+                            </Box>
+                        )}
+
                         {isCustom && (
-                            <Box 
-                                sx={{ 
-                                    mb: 4, 
-                                    p: 3, 
-                                    bgcolor: 'success.50', 
+                            <Box
+                                sx={{
+                                    mb: 4,
+                                    p: 3,
+                                    bgcolor: 'success.50',
                                     borderRadius: 2,
                                     border: '2px solid',
                                     borderColor: 'success.main'
@@ -379,7 +457,7 @@ const ProductDetail = () => {
                                 fullWidth
                                 onClick={handleWhatsAppClick}
                                 startIcon={<WhatsApp />}
-                                sx={{ 
+                                sx={{
                                     py: 2,
                                     fontSize: '1.1rem',
                                     fontWeight: 'bold'
