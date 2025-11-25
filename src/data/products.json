@@ -1,0 +1,90 @@
+[
+    {
+        "id": 1,
+        "title": "EcoGrass Classic",
+        "price": 49.99,
+        "description": "El modelo clásico de Greenpaw. Perfecto para perros pequeños y medianos. Hecho con 100% plástico reciclado.",
+        "images": [
+            "https://images.unsplash.com/photo-1535930749574-1399327ce78f?q=80&w=1000&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=1000&auto=format&fit=crop"
+        ],
+        "stock": 50,
+        "features": [
+            "Drenaje rápido",
+            "Fácil de limpiar",
+            "Antimicrobiano"
+        ],
+        "category": "Interiores",
+        "sizes": [
+            "S",
+            "M",
+            "L"
+        ],
+        "ecoScore": 95
+    },
+    {
+        "id": 2,
+        "title": "EcoGrass Premium",
+        "price": 79.99,
+        "description": "Nuestra versión premium con textura ultra realista y sistema de absorción de olores avanzado.",
+        "images": [
+            "https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?q=80&w=1000&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1599443015574-be5fe8a05783?q=80&w=1000&auto=format&fit=crop"
+        ],
+        "stock": 30,
+        "features": [
+            "Textura Realista",
+            "Control de Olores",
+            "Base Antideslizante"
+        ],
+        "category": "Interiores",
+        "sizes": [
+            "M",
+            "L",
+            "XL"
+        ],
+        "ecoScore": 98
+    },
+    {
+        "id": 3,
+        "title": "Greenpaw Travel",
+        "price": 34.99,
+        "description": "Portátil y ligero. Ideal para viajes o espacios muy reducidos. Se enrolla fácilmente.",
+        "images": [
+            "https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?q=80&w=1000&auto=format&fit=crop"
+        ],
+        "stock": 100,
+        "features": [
+            "Portátil",
+            "Lavable",
+            "Ligero"
+        ],
+        "category": "Viaje",
+        "sizes": [
+            "Unico"
+        ],
+        "ecoScore": 92
+    },
+    {
+        "id": 4,
+        "title": "EcoGrass Patio",
+        "price": 129.99,
+        "description": "Diseñado para exteriores. Resistente a UV y condiciones climáticas extremas.",
+        "images": [
+            "https://images.unsplash.com/photo-1558909612-e2967d8fbdd2?q=80&w=1000&auto=format&fit=crop"
+        ],
+        "stock": 20,
+        "features": [
+            "Resistente UV",
+            "Drenaje Superior",
+            "Gran Formato"
+        ],
+        "category": "Exteriores",
+        "sizes": [
+            "L",
+            "XL",
+            "XXL"
+        ],
+        "ecoScore": 90
+    }
+]

@@ -1,0 +1,109 @@
+import React from 'react';
+import { Box, Container, Typography, Grid, Button, IconButton, Divider, Paper } from '@mui/material';
+import { Add, Remove, Delete, ArrowBack } from '@mui/icons-material';
+import { Helmet } from 'react-helmet-async';
+import { useCart } from '../context/CartContext';
+import { Link, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
+
+const Cart = () => {
+    const { cart, updateQuantity, removeFromCart, cartTotal, clearCart } = useCart();
+    const navigate = useNavigate();
+
+    if (cart.length === 0) {
+        return (
+            <Container maxWidth="md" sx={{ py: 10, textAlign: 'center' }}>
+                <Helmet><title>Carrito | Greenpaw</title></Helmet>
+                <Typography variant="h4" gutterBottom>Tu carrito está vacío</Typography>
+                <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
+                    Parece que aún no has agregado productos.
+                </Typography>
+                <Button component={Link} to="/products" variant="contained" size="large">
+                    Ir a comprar
+                </Button>
+            </Container>
+        );
+    }
+
+    return (
+        <Container maxWidth="lg" sx={{ py: 8 }}>
+            <Helmet><title>Carrito | Greenpaw</title></Helmet>
+
+            <Typography variant="h3" fontWeight="bold" gutterBottom>
+                Carrito de Compras
+            </Typography>
+
+            <Grid container spacing={4}>
+                <Grid size={{ xs: 12, md: 8 }}>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                        {cart.map((item) => (
+                            <motion.div layout key={item.id}>
+                                <Paper sx={{ p: 2, display: 'flex', gap: 2, alignItems: 'center' }}>
+                                    <Box
+                                        component="img"
+                                        src={item.images[0]}
+                                        alt={item.title}
+                                        sx={{ width: 100, height: 100, borderRadius: 2, objectFit: 'cover' }}
+                                    />
+                                    <Box sx={{ flexGrow: 1 }}>
+                                        <Typography variant="h6" fontWeight="bold">{item.title}</Typography>
+                                        <Typography variant="body2" color="text.secondary">${item.price}</Typography>
+                                    </Box>
+                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                        <IconButton onClick={() => updateQuantity(item.id, item.quantity - 1)} disabled={item.quantity <= 1}>
+                                            <Remove />
+                                        </IconButton>
+                                        <Typography fontWeight="bold">{item.quantity}</Typography>
+                                        <IconButton onClick={() => updateQuantity(item.id, item.quantity + 1)}>
+                                            <Add />
+                                        </IconButton>
+                                    </Box>
+                                    <Typography variant="h6" fontWeight="bold" sx={{ minWidth: 80, textAlign: 'right' }}>
+                                        ${(item.price * item.quantity).toFixed(2)}
+                                    </Typography>
+                                    <IconButton color="error" onClick={() => removeFromCart(item.id)}>
+                                        <Delete />
+                                    </IconButton>
+                                </Paper>
+                            </motion.div>
+                        ))}
+                    </Box>
+                    <Button startIcon={<ArrowBack />} onClick={() => navigate('/products')} sx={{ mt: 4 }}>
+                        Continuar comprando
+                    </Button>
+                </Grid>
+
+                <Grid size={{ xs: 12, md: 4 }}>
+                    <Paper sx={{ p: 4, position: 'sticky', top: 100 }}>
+                        <Typography variant="h5" fontWeight="bold" gutterBottom>Resumen</Typography>
+                        <Divider sx={{ my: 2 }} />
+                        <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                            <Typography>Subtotal</Typography>
+                            <Typography>${cartTotal.toFixed(2)}</Typography>
+                        </Box>
+                        <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                            <Typography>Envío</Typography>
+                            <Typography color="success.main">Gratis</Typography>
+                        </Box>
+                        <Divider sx={{ my: 2 }} />
+                        <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 4 }}>
+                            <Typography variant="h6" fontWeight="bold">Total</Typography>
+                            <Typography variant="h6" fontWeight="bold">${cartTotal.toFixed(2)}</Typography>
+                        </Box>
+                        <Button
+                            component={Link}
+                            to="/checkout"
+                            variant="contained"
+                            fullWidth
+                            size="large"
+                        >
+                            Proceder al Pago
+                        </Button>
+                    </Paper>
+                </Grid>
+            </Grid>
+        </Container>
+    );
+};
+
+export default Cart;
