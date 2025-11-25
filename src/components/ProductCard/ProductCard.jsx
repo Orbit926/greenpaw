@@ -3,9 +3,23 @@ import { Card, CardMedia, CardContent, Typography, Button, Box, Chip } from '@mu
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
+import { WhatsApp } from '@mui/icons-material';
+import siteConfig from '../../config/siteConfig';
 
 const ProductCard = ({ product }) => {
     const { addToCart } = useCart();
+    
+    // Detectar si es el producto especial a medida
+    const isCustom = product.isCustom || product.id === 'custom-module';
+    
+    // Generar link de WhatsApp para cotización
+    const whatsappUrl = `https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(
+        'Hola, quiero cotizar un módulo Greenpaw a medida con dimensiones personalizadas. Vengo de la tienda en línea.'
+    )}`;
+    
+    const handleWhatsAppClick = () => {
+        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    };
 
     return (
         <motion.div
@@ -40,27 +54,57 @@ const ProductCard = ({ product }) => {
                         {product.description.substring(0, 80)}...
                     </Typography>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 'auto' }}>
-                        <Typography variant="h6" color="primary.dark" fontWeight="bold">
-                            ${product.price}
-                        </Typography>
-                        <Box sx={{ display: 'flex', gap: 1 }}>
-                            <Button
-                                component={Link}
-                                to={`/products/${product.id}`}
-                                variant="outlined"
-                                size="small"
-                            >
-                                Ver
-                            </Button>
-                            <Button
-                                variant="contained"
-                                size="small"
-                                onClick={() => addToCart(product)}
-                                disableElevation
-                            >
-                                Agregar
-                            </Button>
-                        </Box>
+                        {!isCustom ? (
+                            <>
+                                <Typography variant="h6" color="primary.dark" fontWeight="bold">
+                                    ${product.price}
+                                </Typography>
+                                <Box sx={{ display: 'flex', gap: 1 }}>
+                                    <Button
+                                        component={Link}
+                                        to={`/products/${product.id}`}
+                                        variant="outlined"
+                                        size="small"
+                                    >
+                                        Ver
+                                    </Button>
+                                    <Button
+                                        variant="contained"
+                                        size="small"
+                                        onClick={() => addToCart(product)}
+                                        disableElevation
+                                    >
+                                        Agregar
+                                    </Button>
+                                </Box>
+                            </>
+                        ) : (
+                            <>
+                                <Typography variant="subtitle1" color="text.secondary" fontWeight="500">
+                                    Precio por cotización
+                                </Typography>
+                                <Box sx={{ display: 'flex', gap: 1 }}>
+                                    <Button
+                                        component={Link}
+                                        to={`/products/${product.id}`}
+                                        variant="outlined"
+                                        size="small"
+                                    >
+                                        Ver
+                                    </Button>
+                                    <Button
+                                        variant="contained"
+                                        color="success"
+                                        size="small"
+                                        onClick={handleWhatsAppClick}
+                                        disableElevation
+                                        startIcon={<WhatsApp sx={{ fontSize: 18 }} />}
+                                    >
+                                        Cotizar
+                                    </Button>
+                                </Box>
+                            </>
+                        )}
                     </Box>
                 </CardContent>
             </Card>

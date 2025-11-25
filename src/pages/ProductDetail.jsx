@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Box, Container, Typography, Grid, Button, Chip, Rating, Divider, IconButton, Checkbox, FormControlLabel, Avatar, Card } from '@mui/material';
-import { Add, Remove, ArrowBack } from '@mui/icons-material';
+import { Add, Remove, ArrowBack, WhatsApp } from '@mui/icons-material';
 import { useCart } from '../context/CartContext';
 import { useProducts } from '../context/ProductsContext';
+import siteConfig from '../config/siteConfig';
 
 // Componente para cada item de complemento
 const ComplementItem = ({ complement, selected, onToggle }) => {
@@ -82,6 +83,18 @@ const ProductDetail = () => {
     const [selectedComplements, setSelectedComplements] = useState([]);
 
     const product = getProductById(id);
+    
+    // Detectar si es el producto especial a medida
+    const isCustom = product && (product.isCustom || product.id === 'custom-module');
+    
+    // Generar link de WhatsApp para cotización
+    const whatsappUrl = `https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(
+        `Hola, quiero cotizar un módulo Greenpaw a medida con dimensiones personalizadas. Vengo de la tienda en línea.`
+    )}`;
+    
+    const handleWhatsAppClick = () => {
+        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    };
 
     useEffect(() => {
         if (product) {
@@ -203,21 +216,60 @@ const ProductDetail = () => {
                             {product.title}
                         </Typography>
 
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 3 }}>
-                            <Rating value={4.8} readOnly precision={0.5} />
-                            <Typography variant="body2" color="text.secondary">(120 reviews)</Typography>
-                        </Box>
+                        {!isCustom && (
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 3 }}>
+                                <Rating value={4.8} readOnly precision={0.5} />
+                                <Typography variant="body2" color="text.secondary">(120 reviews)</Typography>
+                            </Box>
+                        )}
 
-                        <Typography variant="h4" color="primary.dark" fontWeight="bold" sx={{ mb: 3 }}>
-                            ${product.price}
-                        </Typography>
+                        {!isCustom ? (
+                            <Typography variant="h4" color="primary.dark" fontWeight="bold" sx={{ mb: 3 }}>
+                                ${product.price}
+                            </Typography>
+                        ) : (
+                            <Chip 
+                                label="Precio por cotización" 
+                                color="success" 
+                                sx={{ mb: 3, fontSize: '1rem', py: 2.5, px: 1 }} 
+                            />
+                        )}
 
                         <Typography variant="body1" paragraph sx={{ mb: 4 }}>
                             {product.description}
                         </Typography>
+                        
+                        {isCustom && (
+                            <Box 
+                                sx={{ 
+                                    mb: 4, 
+                                    p: 3, 
+                                    bgcolor: 'success.50', 
+                                    borderRadius: 2,
+                                    border: '2px solid',
+                                    borderColor: 'success.main'
+                                }}
+                            >
+                                <Typography variant="h6" fontWeight="bold" gutterBottom color="success.dark">
+                                    ¿Cómo funciona?
+                                </Typography>
+                                <Typography variant="body2" color="text.secondary" paragraph>
+                                    1. Haz clic en "Cotizar por WhatsApp"
+                                </Typography>
+                                <Typography variant="body2" color="text.secondary" paragraph>
+                                    2. Nos compartes las medidas exactas que necesitas
+                                </Typography>
+                                <Typography variant="body2" color="text.secondary" paragraph>
+                                    3. Te enviamos una cotización personalizada
+                                </Typography>
+                                <Typography variant="body2" color="text.secondary">
+                                    4. Fabricamos tu módulo a medida
+                                </Typography>
+                            </Box>
+                        )}
 
-                        {/* Sección de Complementos */}
-                        {complementProducts && complementProducts.length > 0 && (
+                        {/* Sección de Complementos - Solo para productos normales */}
+                        {!isCustom && complementProducts && complementProducts.length > 0 && (
                             <Card
                                 sx={{
                                     mb: 4,
@@ -253,8 +305,8 @@ const ProductDetail = () => {
                             </Card>
                         )}
 
-                        {/* Resumen de precio total */}
-                        {selectedComplements.length > 0 && (
+                        {/* Resumen de precio total - Solo para productos normales */}
+                        {!isCustom && selectedComplements.length > 0 && (
                             <Box sx={{ mb: 3, p: 2, bgcolor: 'success.50', borderRadius: 2, border: '1px solid', borderColor: 'success.200' }}>
                                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
                                     <Typography variant="body2" color="text.secondary">
@@ -296,26 +348,46 @@ const ProductDetail = () => {
 
                         <Divider sx={{ mb: 4 }} />
 
-                        <Box sx={{ display: 'flex', gap: 3, alignItems: 'center' }}>
-                            <Box sx={{ display: 'flex', alignItems: 'center', border: '1px solid #ddd', borderRadius: 2 }}>
-                                <IconButton onClick={() => setQuantity(Math.max(1, quantity - 1))}>
-                                    <Remove />
-                                </IconButton>
-                                <Typography sx={{ px: 2, fontWeight: 'bold' }}>{quantity}</Typography>
-                                <IconButton onClick={() => setQuantity(quantity + 1)}>
-                                    <Add />
-                                </IconButton>
+                        {!isCustom ? (
+                            // Selector de cantidad y botón para productos normales
+                            <Box sx={{ display: 'flex', gap: 3, alignItems: 'center' }}>
+                                <Box sx={{ display: 'flex', alignItems: 'center', border: '1px solid #ddd', borderRadius: 2 }}>
+                                    <IconButton onClick={() => setQuantity(Math.max(1, quantity - 1))}>
+                                        <Remove />
+                                    </IconButton>
+                                    <Typography sx={{ px: 2, fontWeight: 'bold' }}>{quantity}</Typography>
+                                    <IconButton onClick={() => setQuantity(quantity + 1)}>
+                                        <Add />
+                                    </IconButton>
+                                </Box>
+                                <Button
+                                    variant="contained"
+                                    size="large"
+                                    fullWidth
+                                    onClick={handleAddToCart}
+                                    sx={{ py: 1.5 }}
+                                >
+                                    Agregar al Carrito
+                                </Button>
                             </Box>
+                        ) : (
+                            // Botón de WhatsApp para producto a medida
                             <Button
                                 variant="contained"
+                                color="success"
                                 size="large"
                                 fullWidth
-                                onClick={handleAddToCart}
-                                sx={{ py: 1.5 }}
+                                onClick={handleWhatsAppClick}
+                                startIcon={<WhatsApp />}
+                                sx={{ 
+                                    py: 2,
+                                    fontSize: '1.1rem',
+                                    fontWeight: 'bold'
+                                }}
                             >
-                                Agregar al Carrito
+                                Cotizar por WhatsApp
                             </Button>
-                        </Box>
+                        )}
                     </motion.div>
                 </Grid>
             </Grid>

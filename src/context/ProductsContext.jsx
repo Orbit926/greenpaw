@@ -1,8 +1,22 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { getProducts } from '../services';
 import productsData from '../data/products.json';
+import siteConfig from '../config/siteConfig';
 
 const ProductsContext = createContext();
+
+// Producto especial virtual para módulos a medida
+const CUSTOM_MODULE_PRODUCT = {
+    id: 'custom-module',
+    title: 'Módulo Greenpaw a medida',
+    description: 'Pide tu módulo con medidas personalizadas. Ideal para espacios específicos o necesidades particulares de tu mascota.',
+    price: 0, // No tiene precio fijo
+    images: ['https://images.unsplash.com/photo-1581888227599-779811939961?q=80&w=1000&auto=format&fit=crop'],
+    category: 'personalizado',
+    ecoScore: 100,
+    isCustom: true,
+    tags: ['personalizado', 'a-medida']
+};
 
 export const ProductsProvider = ({ children }) => {
     const [products, setProducts] = useState([]);
@@ -21,25 +35,34 @@ export const ProductsProvider = ({ children }) => {
             setLoading(true);
             setError(null);
             
+            let shopifyProducts = [];
+            
             if (USE_SHOPIFY) {
                 // Cargar desde Shopify
-                const data = await getProducts();
-                setProducts(data);
+                shopifyProducts = await getProducts();
             } else {
                 // Usar productos locales (JSON)
-                setProducts(productsData);
+                shopifyProducts = productsData;
             }
+            
+            // Inyectar el producto especial al inicio del array
+            setProducts([CUSTOM_MODULE_PRODUCT, ...shopifyProducts]);
         } catch (err) {
             console.error('Error loading products:', err);
             setError(err.message);
-            // Fallback a productos locales si Shopify falla
-            setProducts(productsData);
+            // Fallback a productos locales si Shopify falla, pero siempre incluir producto custom
+            setProducts([CUSTOM_MODULE_PRODUCT, ...productsData]);
         } finally {
             setLoading(false);
         }
     };
 
     const getProductById = (id) => {
+        // Manejar el producto custom que tiene ID string
+        if (id === 'custom-module') {
+            return products.find(p => p.id === 'custom-module');
+        }
+        // IDs numéricos de Shopify
         return products.find(p => p.id === parseInt(id));
     };
 
