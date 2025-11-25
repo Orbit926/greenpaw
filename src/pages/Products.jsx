@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import ProductCard from '../components/ProductCard/ProductCard';
 import productsData from '../data/products.json';
 import { useSearchParams } from 'react-router-dom';
+import { getProducts } from '../services';
 
 const Products = () => {
     const [searchParams, setSearchParams] = useSearchParams();
