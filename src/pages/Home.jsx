@@ -4,7 +4,7 @@ import Hero from '../components/Hero/Hero';
 import CategoryBanner from '../components/CategoryBanner/CategoryBanner';
 import ProductCard from '../components/ProductCard/ProductCard';
 import ReviewCard from '../components/ReviewCard/ReviewCard';
-import products from '../data/products.json';
+import { useProducts } from '../context/ProductsContext';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
@@ -15,6 +15,7 @@ const reviews = [
 ];
 
 const Home = () => {
+    const { products } = useProducts();
     const featuredProducts = products.slice(0, 3);
 
     useEffect(() => {

@@ -1,11 +1,11 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { Box, Container, Typography, Grid, TextField, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
+import { Box, Container, Typography, Grid, TextField, MenuItem, Select, FormControl, InputLabel, CircularProgress } from '@mui/material';
 import ProductCard from '../components/ProductCard/ProductCard';
-import productsData from '../data/products.json';
 import { useSearchParams } from 'react-router-dom';
-import { getProducts } from '../services';
+import { useProducts } from '../context/ProductsContext';
 
 const Products = () => {
+    const { products, loading } = useProducts();
     const [searchParams, setSearchParams] = useSearchParams();
     const categoryParam = searchParams.get('category') || 'all';
 
@@ -13,7 +13,7 @@ const Products = () => {
     const [searchTerm, setSearchTerm] = useState('');
 
     const filteredProducts = useMemo(() => {
-        let result = [...productsData];
+        let result = [...products];
 
         // Filter by category
         if (categoryParam !== 'all') {
@@ -33,7 +33,7 @@ const Products = () => {
         }
 
         return result;
-    }, [categoryParam, searchTerm, sortBy]);
+    }, [products, categoryParam, searchTerm, sortBy]);
 
     const handleCategoryChange = (event) => {
         const value = event.target.value;
@@ -48,6 +48,14 @@ const Products = () => {
     useEffect(() => {
         document.title = 'Catálogo | Greenpaw';
     }, []);
+
+    if (loading) {
+        return (
+            <Container maxWidth="lg" sx={{ py: 8, display: 'flex', justifyContent: 'center' }}>
+                <CircularProgress />
+            </Container>
+        );
+    }
 
     return (
         <Container maxWidth="lg" sx={{ py: 8 }}>

@@ -3,16 +3,17 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Box, Container, Typography, Grid, Button, Chip, Rating, Divider, IconButton } from '@mui/material';
 import { Add, Remove, ArrowBack } from '@mui/icons-material';
 import { useCart } from '../context/CartContext';
-import productsData from '../data/products.json';
+import { useProducts } from '../context/ProductsContext';
 import { motion } from 'framer-motion';
 
 const ProductDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const { addToCart, openCart } = useCart();
+    const { getProductById } = useProducts();
     const [quantity, setQuantity] = useState(1);
 
-    const product = productsData.find(p => p.id === parseInt(id));
+    const product = getProductById(id);
 
     if (!product) {
         return (
