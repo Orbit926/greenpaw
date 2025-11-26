@@ -7,6 +7,8 @@ import { useCart } from '../context/CartContext';
 import { useProducts } from '../context/ProductsContext';
 import siteConfig from '../config/siteConfig';
 import { Link as RouterLink } from 'react-router-dom';
+import { getPersonalizationConfigForProduct } from '../personalization/personalizationEngine';
+import PersonalizationModal from '../personalization/PersonalizationModal';
 
 // Componente para cada item de complemento
 const ComplementItem = ({ complement, selected, onToggle }) => {
@@ -83,6 +85,11 @@ const ProductDetail = () => {
     const [quantity, setQuantity] = useState(1);
     const [selectedComplements, setSelectedComplements] = useState([]);
 
+    // Estados para el sistema de personalización
+    const [pendingLinesToAdd, setPendingLinesToAdd] = useState([]);
+    const [itemsToPersonalize, setItemsToPersonalize] = useState([]);
+    const [personalizationModalOpen, setPersonalizationModalOpen] = useState(false);
+
     const product = getProductById(id);
 
     // Detectar si es el producto especial a medida
@@ -137,8 +144,10 @@ const ProductDetail = () => {
                 title: p.title,
                 description: p.description,
                 imageUrl: p.images[0],
+                images: p.images,  // Incluir todas las imágenes
                 price: p.price,
-                variantId: p.variantId
+                variantId: p.variantId,
+                tags: p.tags  // CRÍTICO: Incluir tags para detección de personalización
             }));
     }, [products, product]);
 
@@ -152,21 +161,92 @@ const ProductDetail = () => {
     }
 
     const handleAddToCart = () => {
-        // Agregar producto principal
-        addToCart(product, quantity);
+        // Construir array de líneas a agregar
+        const linesToAdd = [];
 
-        // Agregar complementos seleccionados con la misma cantidad que el producto principal
-        selectedComplements.forEach(complementId => {
+        // Línea del producto principal
+        linesToAdd.push({
+            tempId: `main-${product.id}-${Date.now()}`,
+            product: product,
+            quantity: quantity
+        });
+
+        // Líneas de complementos seleccionados (uno por cada unidad del producto)
+        selectedComplements.forEach((complementId) => {
             const complement = complementProducts.find(c => c.id === complementId);
             if (complement) {
-                addToCart({
-                    ...complement,
-                    images: [complement.imageUrl]
-                }, quantity);  // Usa la misma cantidad que el producto principal
+                // Agregar una línea de complemento por cada unidad del producto principal
+                for (let i = 0; i < quantity; i++) {
+                    linesToAdd.push({
+                        tempId: `complement-${complementId}-${Date.now()}-${i}`,
+                        product: {
+                            ...complement,
+                            images: [complement.imageUrl]
+                        },
+                        quantity: 1
+                    });
+                }
             }
         });
 
+        // Detectar cuáles líneas necesitan personalización
+        const itemsNeedingPersonalization = linesToAdd
+            .filter(line => getPersonalizationConfigForProduct(line.product).length > 0)
+            .map(line => ({
+                lineId: line.tempId,
+                product: line.product,
+                personalizationConfig: getPersonalizationConfigForProduct(line.product)
+            }));
+
+        if (itemsNeedingPersonalization.length > 0) {
+            // Guardar líneas pendientes y abrir modal de personalización
+            setPendingLinesToAdd(linesToAdd);
+            setItemsToPersonalize(itemsNeedingPersonalization);
+            setPersonalizationModalOpen(true);
+        } else {
+            // No hay personalización → agregar directamente al carrito
+            linesToAdd.forEach(line => {
+                addToCart(line.product, line.quantity);
+            });
+            openCart();
+        }
+    };
+
+    // Handler para cuando se confirma el modal de personalización
+    const handlePersonalizationConfirm = (personalizationValues) => {
+        // Enriquecer líneas con properties de personalización
+        const enrichedLines = pendingLinesToAdd.map(line => {
+            const personalization = personalizationValues.find(
+                p => p.lineId === line.tempId
+            );
+
+            if (personalization) {
+                return {
+                    ...line,
+                    properties: personalization.properties
+                };
+            }
+
+            return line;
+        });
+
+        // Agregar todas las líneas al carrito
+        enrichedLines.forEach(line => {
+            addToCart(line.product, line.quantity, line.properties);
+        });
+
+        // Cerrar modal, limpiar estado y abrir carrito
+        setPersonalizationModalOpen(false);
+        setPendingLinesToAdd([]);
+        setItemsToPersonalize([]);
         openCart();
+    };
+
+    // Handler para cancelación del modal
+    const handlePersonalizationCancel = () => {
+        setPersonalizationModalOpen(false);
+        setPendingLinesToAdd([]);
+        setItemsToPersonalize([]);
     };
 
     return (
@@ -469,6 +549,14 @@ const ProductDetail = () => {
                     </motion.div>
                 </Grid>
             </Grid>
+
+            {/* Modal de personalización */}
+            <PersonalizationModal
+                open={personalizationModalOpen}
+                itemsToPersonalize={itemsToPersonalize}
+                onCancel={handlePersonalizationCancel}
+                onConfirm={handlePersonalizationConfirm}
+            />
         </Container>
     );
 };

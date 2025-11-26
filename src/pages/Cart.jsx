@@ -37,7 +37,7 @@ const Cart = () => {
                 <Grid size={{ xs: 12, md: 8 }}>
                     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                         {cart.map((item) => (
-                            <motion.div layout key={item.id}>
+                            <motion.div layout key={item.uniqueId}>
                                 <Paper sx={{ p: 2, display: 'flex', gap: 2, alignItems: 'center' }}>
                                     <Box
                                         component="img"
@@ -48,20 +48,25 @@ const Cart = () => {
                                     <Box sx={{ flexGrow: 1 }}>
                                         <Typography variant="h6" fontWeight="bold">{item.title}</Typography>
                                         <Typography variant="body2" color="text.secondary">${item.price}</Typography>
+                                        {item.properties && (
+                                            <Typography variant="caption" color="primary.main" sx={{ display: 'block', mt: 0.5, fontWeight: 'bold' }}>
+                                                {Object.entries(item.properties).map(([key, value]) => `${key}: ${value}`).join(', ')}
+                                            </Typography>
+                                        )}
                                     </Box>
                                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                        <IconButton onClick={() => updateQuantity(item.id, item.quantity - 1)} disabled={item.quantity <= 1}>
+                                        <IconButton onClick={() => updateQuantity(item.uniqueId, item.quantity - 1)} disabled={item.quantity <= 1}>
                                             <Remove />
                                         </IconButton>
                                         <Typography fontWeight="bold">{item.quantity}</Typography>
-                                        <IconButton onClick={() => updateQuantity(item.id, item.quantity + 1)}>
+                                        <IconButton onClick={() => updateQuantity(item.uniqueId, item.quantity + 1)}>
                                             <Add />
                                         </IconButton>
                                     </Box>
                                     <Typography variant="h6" fontWeight="bold" sx={{ minWidth: 80, textAlign: 'right' }}>
                                         ${(item.price * item.quantity).toFixed(2)}
                                     </Typography>
-                                    <IconButton color="error" onClick={() => removeFromCart(item.id)}>
+                                    <IconButton color="error" onClick={() => removeFromCart(item.uniqueId)}>
                                         <Delete />
                                     </IconButton>
                                 </Paper>

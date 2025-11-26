@@ -39,7 +39,7 @@ const CartDrawer = () => {
                 ) : (
                     <List sx={{ flexGrow: 1, overflow: 'auto' }}>
                         {cart.map((item) => (
-                            <ListItem key={item.id} alignItems="flex-start" sx={{ px: 0 }}>
+                            <ListItem key={item.uniqueId} alignItems="flex-start" sx={{ px: 0 }}>
                                 <ListItemAvatar>
                                     <Avatar src={item.images[0]} variant="rounded" sx={{ width: 80, height: 80, mr: 2 }} />
                                 </ListItemAvatar>
@@ -51,18 +51,23 @@ const CartDrawer = () => {
                                     }
                                     secondary={
                                         <Box>
-                                            <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+                                            <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
                                                 ${item.price}
                                             </Typography>
+                                            {item.properties && (
+                                                <Typography variant="caption" color="primary.main" sx={{ display: 'block', mb: 1, fontWeight: 'bold' }}>
+                                                    {Object.entries(item.properties).map(([key, value]) => `${key}: ${value}`).join(', ')}
+                                                </Typography>
+                                            )}
                                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                                <IconButton size="small" onClick={() => updateQuantity(item.id, item.quantity - 1)} disabled={item.quantity <= 1}>
+                                                <IconButton size="small" onClick={() => updateQuantity(item.uniqueId, item.quantity - 1)} disabled={item.quantity <= 1}>
                                                     <Remove fontSize="small" />
                                                 </IconButton>
                                                 <Typography variant="body2">{item.quantity}</Typography>
-                                                <IconButton size="small" onClick={() => updateQuantity(item.id, item.quantity + 1)}>
+                                                <IconButton size="small" onClick={() => updateQuantity(item.uniqueId, item.quantity + 1)}>
                                                     <Add fontSize="small" />
                                                 </IconButton>
-                                                <IconButton size="small" color="error" onClick={() => removeFromCart(item.id)} sx={{ ml: 'auto' }}>
+                                                <IconButton size="small" color="error" onClick={() => removeFromCart(item.uniqueId)} sx={{ ml: 'auto' }}>
                                                     <Delete fontSize="small" />
                                                 </IconButton>
                                             </Box>

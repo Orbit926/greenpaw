@@ -25,29 +25,44 @@ export const CartProvider = ({ children }) => {
         localStorage.setItem('greenpaw_cart', JSON.stringify(cart));
     }, [cart]);
 
-    const addToCart = (product, quantity = 1) => {
+    const addToCart = (product, quantity = 1, properties = null) => {
         setCart((prevCart) => {
-            const existingItem = prevCart.find((item) => item.id === product.id);
+            // Generar un ID único que considere las properties
+            // Si dos productos tienen diferentes properties, son items diferentes en el carrito
+            const uniqueId = properties
+                ? `${product.id}-${JSON.stringify(properties)}`
+                : product.id;
+
+            const existingItem = prevCart.find((item) => item.uniqueId === uniqueId);
+
             if (existingItem) {
+                // Si ya existe un item con el mismo ID y properties, incrementar cantidad
                 return prevCart.map((item) =>
-                    item.id === product.id
+                    item.uniqueId === uniqueId
                         ? { ...item, quantity: item.quantity + quantity }
                         : item
                 );
             }
-            return [...prevCart, { ...product, quantity }];
+
+            // Agregar nuevo item con uniqueId y properties
+            return [...prevCart, {
+                ...product,
+                uniqueId,
+                quantity,
+                properties
+            }];
         });
     };
 
-    const removeFromCart = (id) => {
-        setCart((prevCart) => prevCart.filter((item) => item.id !== id));
+    const removeFromCart = (uniqueId) => {
+        setCart((prevCart) => prevCart.filter((item) => item.uniqueId !== uniqueId));
     };
 
-    const updateQuantity = (id, quantity) => {
+    const updateQuantity = (uniqueId, quantity) => {
         if (quantity < 1) return;
         setCart((prevCart) =>
             prevCart.map((item) =>
-                item.id === id ? { ...item, quantity } : item
+                item.uniqueId === uniqueId ? { ...item, quantity } : item
             )
         );
     };
