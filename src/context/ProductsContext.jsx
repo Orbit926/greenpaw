@@ -11,7 +11,7 @@ const CUSTOM_MODULE_PRODUCT = {
     title: 'Módulo Greenpaw a medida',
     description: 'Pide tu módulo con medidas personalizadas. Ideal para espacios específicos o necesidades particulares de tu mascota.',
     price: 0, // No tiene precio fijo
-    images: ['https://images.unsplash.com/photo-1581888227599-779811939961?q=80&w=1000&auto=format&fit=crop'],
+    images: ['/products/modulo_especial.jpeg'],
     category: 'personalizado',
     ecoScore: 100,
     isCustom: true,
@@ -22,7 +22,7 @@ export const ProductsProvider = ({ children }) => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    
+
     // Cambiar a true cuando quieras usar Shopify
     const USE_SHOPIFY = import.meta.env.VITE_USE_SHOPIFY === 'true';
 
@@ -34,9 +34,9 @@ export const ProductsProvider = ({ children }) => {
         try {
             setLoading(true);
             setError(null);
-            
+
             let shopifyProducts = [];
-            
+
             if (USE_SHOPIFY) {
                 // Cargar desde Shopify
                 shopifyProducts = await getProducts();
@@ -44,7 +44,7 @@ export const ProductsProvider = ({ children }) => {
                 // Usar productos locales (JSON)
                 shopifyProducts = productsData;
             }
-            
+
             // Inyectar el producto especial al inicio del array
             setProducts([CUSTOM_MODULE_PRODUCT, ...shopifyProducts]);
         } catch (err) {

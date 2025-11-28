@@ -8,15 +8,15 @@ import siteConfig from '../../config/siteConfig';
 
 const ProductCard = ({ product }) => {
     const { addToCart } = useCart();
-    
+
     // Detectar si es el producto especial a medida
     const isCustom = product.isCustom || product.id === 'custom-module';
-    
+
     // Generar link de WhatsApp para cotización
     const whatsappUrl = `https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(
         'Hola, quiero cotizar un módulo Greenpaw a medida con dimensiones personalizadas. Vengo de la tienda en línea.'
     )}`;
-    
+
     const handleWhatsAppClick = () => {
         window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     };
@@ -94,7 +94,6 @@ const ProductCard = ({ product }) => {
                                     </Button>
                                     <Button
                                         variant="contained"
-                                        color="success"
                                         size="small"
                                         onClick={handleWhatsAppClick}
                                         disableElevation
