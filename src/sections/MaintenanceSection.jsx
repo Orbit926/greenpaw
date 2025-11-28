@@ -125,12 +125,12 @@ const MaintenanceSection = () => {
                                     </Typography>
 
                                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 3 }}>
-                                        <LocationOn sx={{ fontSize: 20, color: 'error.main' }} />
+                                        <LocationOn sx={{ fontSize: 20 }} />
                                         <Typography
                                             variant="subtitle1"
                                             sx={{ color: 'text.secondary', fontWeight: 500 }}
                                         >
-                                            Solo Zona Metropolitana de Guadalajara
+                                            Solo Zona Metropolitana de Guadalajara y algunas áreas de la CDMX
                                         </Typography>
                                     </Box>
 
@@ -235,7 +235,6 @@ const MaintenanceSection = () => {
                                             p: 2,
                                             borderRadius: 3,
                                             bgcolor: 'success.50',
-                                            color: 'success.main',
                                             mb: 3
                                         }}
                                     >
@@ -247,7 +246,7 @@ const MaintenanceSection = () => {
                                     </Typography>
 
                                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 3 }}>
-                                        <LocationOn sx={{ fontSize: 20, color: 'success.main' }} />
+                                        <LocationOn sx={{ fontSize: 20 }} />
                                         <Typography
                                             variant="subtitle1"
                                             sx={{ color: 'text.secondary', fontWeight: 500 }}
@@ -341,7 +340,7 @@ const MaintenanceSection = () => {
                             textAlign: 'center'
                         }}
                     >
-                        <Typography variant="h6" fontWeight="bold" gutterBottom color="info.dark">
+                        <Typography variant="h6" fontWeight="bold" gutterBottom color="text.primary">
                             ¿Con qué frecuencia debo hacer mantenimiento?
                         </Typography>
                         <Typography variant="body1" color="text.secondary">
