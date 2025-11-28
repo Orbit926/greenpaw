@@ -6,7 +6,7 @@ const siteConfig = {
     company: {
         name: 'Greenpaw',
         slogan: 'Solución Ecológica para Mascotas',
-        description: 'Módulos eco-friendly fabricados con plásticos reciclados para el bienestar de tu mascota y del planeta.',
+        description: 'Sanitarios eco-friendly fabricados con plásticos reciclados para el bienestar de tu mascota y del planeta.',
         founded: '2020',
         location: 'Guadalajara, Jalisco, México'
     },
@@ -69,8 +69,8 @@ const siteConfig = {
     seo: {
         defaultTitle: 'Greenpaw | Solución Ecológica para Mascotas',
         titleTemplate: '%s | Greenpaw',
-        description: 'Módulos eco-friendly para mascotas fabricados con plásticos reciclados. Pasto natural, tierra de calidad y diseño sustentable.',
-        keywords: ['greenpaw', 'mascotas', 'eco-friendly', 'plástico reciclado', 'pasto para perros', 'módulos sustentables', 'guadalajara'],
+        description: 'Sanitarios eco-friendly para mascotas fabricados con plásticos reciclados. Pasto natural, tierra de calidad y diseño sustentable.',
+        keywords: ['greenpaw', 'mascotas', 'eco-friendly', 'plástico reciclado', 'pasto para perros', 'sanitarios sustentables', 'guadalajara'],
         author: 'Greenpaw',
         ogImage: '/og-image.jpg', // Imagen para compartir en redes sociales
         twitterHandle: '@greenpaw'

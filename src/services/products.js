@@ -49,9 +49,8 @@ function transformShopifyProduct(shopifyProduct) {
   } else if (shopifyProduct.title.toLowerCase().includes('rueda') || 
              shopifyProduct.title.toLowerCase().includes('llanta')) {
     category = 'Accesorios';
-  } else if (shopifyProduct.title.toLowerCase().includes('módulo') || 
-             shopifyProduct.title.toLowerCase().includes('modulo')) {
-    category = 'Módulos';
+  } else if (shopifyProduct.title.toLowerCase().includes('sanitario')) {
+    category = 'Sanitarios';
   }
   
   return {

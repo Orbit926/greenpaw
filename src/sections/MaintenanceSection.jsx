@@ -56,7 +56,7 @@ const MaintenanceSection = () => {
                                 fontWeight: 400
                             }}
                         >
-                            Mantén tu módulo Greenpaw siempre fresco y renovado con nuestro
+                            Mantén tu sanitario Greenpaw siempre fresco y renovado con nuestro
                             servicio especializado de cambio de tierra y pasto.
                         </Typography>
                     </Box>
@@ -139,7 +139,7 @@ const MaintenanceSection = () => {
                                         sx={{ mb: 4, color: 'text.secondary', lineHeight: 1.8 }}
                                     >
                                         Un técnico especializado acude a tu hogar para realizar el
-                                        cambio completo de tierra y pasto de tu módulo Greenpaw.
+                                        cambio completo de tierra y pasto de tu sanitario Greenpaw.
                                     </Typography>
 
                                     <Box sx={{ mb: 4, flexGrow: 1 }}>
@@ -164,7 +164,7 @@ const MaintenanceSection = () => {
                                             </li>
                                             <li>
                                                 <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-                                                    Limpieza del módulo
+                                                    Limpieza del sanitario
                                                 </Typography>
                                             </li>
                                             <li>
@@ -177,7 +177,7 @@ const MaintenanceSection = () => {
 
                                     <Button
                                         component="a"
-                                        href={`https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent('Hola! Me gustaría agendar un servicio de mantenimiento a domicilio para mi módulo Greenpaw.')}`}
+                                        href={`https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent('Hola! Me gustaría agendar un servicio de mantenimiento a domicilio para mi sanitario Greenpaw.')}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         variant="contained"
@@ -260,7 +260,7 @@ const MaintenanceSection = () => {
                                         sx={{ mb: 4, color: 'text.secondary', lineHeight: 1.8 }}
                                     >
                                         Si vives fuera de Guadalajara, te enviamos todo lo necesario
-                                        para que renueves tu módulo tú mismo, de manera fácil y rápida.
+                                        para que renueves tu sanitario tú mismo, de manera fácil y rápida.
                                     </Typography>
 
                                     <Box sx={{ mb: 4, flexGrow: 1 }}>
@@ -345,7 +345,7 @@ const MaintenanceSection = () => {
                         </Typography>
                         <Typography variant="body1" color="text.secondary">
                             Recomendamos cambiar la tierra y el pasto cada 2-3 meses para mantener
-                            tu módulo Greenpaw en óptimas condiciones de higiene y frescura.
+                            tu sanitario Greenpaw en óptimas condiciones de higiene y frescura.
                         </Typography>
                     </Box>
                 </motion.div>

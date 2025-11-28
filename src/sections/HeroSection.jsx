@@ -16,11 +16,23 @@ const HeroSection = () => {
     const heroImages = [
         {
             src: '/img/landing/hero/hero-1.jpeg',
-            alt: 'Módulo Greenpaw en terraza moderna'
+            alt: 'Sanitario Greenpaw en terraza moderna'
         },
         {
             src: '/img/landing/hero/hero-2.jpeg',
-            alt: 'Perro feliz disfrutando de módulo Greenpaw'
+            alt: 'Perro feliz disfrutando de sanitario Greenpaw'
+        },
+        {
+            src: '/img/landing/hero/hero-3.jpeg',
+            alt: 'Sanitario Greenpaw con pasto natural'
+        },
+        {
+            src: '/img/landing/hero/hero-4.jpeg',
+            alt: 'Sanitario ecológico Greenpaw'
+        },
+        {
+            src: '/img/landing/hero/hero-5.jpeg',
+            alt: 'Mascota usando sanitario Greenpaw'
         }
     ];
 
@@ -126,7 +138,7 @@ const HeroSection = () => {
                                     fontSize: { xs: '1rem', md: '1.25rem' }
                                 }}
                             >
-                                Módulos de pasto natural eco-friendly para el bienestar de tu mascota.
+                                Sanitarios de pasto natural eco-friendly para el bienestar de tu mascota.
                                 Fabricados con plásticos reciclados, entregando confort y sostenibilidad.
                             </Typography>
                         </motion.div>

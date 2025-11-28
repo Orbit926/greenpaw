@@ -5,11 +5,11 @@ import siteConfig from '../config/siteConfig';
 
 const ProductsContext = createContext();
 
-// Producto especial virtual para módulos a medida
+// Producto especial virtual para sanitarios a medida
 const CUSTOM_MODULE_PRODUCT = {
     id: 'custom-module',
-    title: 'Módulo Greenpaw a medida',
-    description: 'Pide tu módulo con medidas personalizadas. Ideal para espacios específicos o necesidades particulares de tu mascota.',
+    title: 'Sanitario Greenpaw a medida',
+    description: 'Pide tu sanitario con medidas personalizadas. Ideal para espacios específicos o necesidades particulares de tu mascota.',
     price: 0, // No tiene precio fijo
     images: ['/img/products/modulo_especial.jpeg'],
     category: 'personalizado',

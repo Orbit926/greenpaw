@@ -37,7 +37,7 @@ const AboutSection = () => {
                             <Box
                                 component="img"
                                 src="/img/landing/about/about.jpeg"
-                                alt="Greenpaw - Módulo con pasto"
+                                alt="Greenpaw - Sanitario con pasto"
                                 sx={{
                                     width: '100%',
                                     height: 'auto',
@@ -92,7 +92,7 @@ const AboutSection = () => {
                                 }}
                             >
                                 En <strong>Greenpaw</strong>, creemos que cada mascota merece un espacio natural
-                                y cómodo dentro del hogar. Nuestros módulos combinan pasto real con tierra,
+                                y cómodo dentro del hogar. Nuestros sanitarios combinan pasto real con tierra,
                                 creando una experiencia auténtica y saludable.
                             </Typography>
                             <Typography

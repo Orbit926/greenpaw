@@ -8,12 +8,12 @@ const EcoFriendlySection = () => {
         {
             icon: <Recycling sx={{ fontSize: 50, color: 'primary.main' }} />,
             title: 'Plásticos Reciclados',
-            description: 'Fabricamos nuestros módulos con plásticos reciclados: tapas de shampoo, botellas PET y otros plásticos rescatados del desecho.'
+            description: 'Fabricamos nuestros sanitarios con plásticos reciclados: tapas de shampoo, botellas PET y otros plásticos rescatados del desecho.'
         },
         {
             icon: <WaterDrop sx={{ fontSize: 50, color: 'primary.main' }} />,
             title: 'Reducción de Residuos',
-            description: 'Cada módulo Greenpaw evita que aproximadamente 2kg de plástico terminen en vertederos o en el océano.'
+            description: 'Cada sanitario Greenpaw evita que aproximadamente 2kg de plástico terminen en vertederos o en el océano.'
         },
         {
             icon: <Forest sx={{ fontSize: 50, color: 'primary.main' }} />,
@@ -190,7 +190,7 @@ const EcoFriendlySection = () => {
                                     2kg+
                                 </Typography>
                                 <Typography variant="body1" sx={{ opacity: 0.9 }}>
-                                    Plástico reciclado por módulo
+                                    Plástico reciclado por sanitario
                                 </Typography>
                             </Grid>
                             <Grid size={{ xs: 12, md: 4 }}>

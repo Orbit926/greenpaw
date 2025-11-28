@@ -11,7 +11,7 @@ const TestimonialsSection = () => {
             name: 'María González',
             location: 'Guadalajara, Jal.',
             rating: 5,
-            comment: 'Mi perro Max está encantado con su nuevo espacio. El módulo se ve increíble en mi terraza y es muy fácil de mantener. ¡100% recomendado!',
+            comment: 'Mi perro Max está encantado con su nuevo espacio. El sanitario se ve increíble en mi terraza y es muy fácil de mantener. ¡100% recomendado!',
             avatar: 'https://i.pravatar.cc/150?img=1'
         },
         {
@@ -51,7 +51,7 @@ const TestimonialsSection = () => {
             name: 'Luis Alberto Torres',
             location: 'Guadalajara, Jal.',
             rating: 5,
-            comment: 'Tengo tres módulos en mi casa. La calidad es excepcional y saber que están hechos con materiales reciclados me hace sentir bien.',
+            comment: 'Tengo tres sanitarios en mi casa. La calidad es excepcional y saber que están hechos con materiales reciclados me hace sentir bien.',
             avatar: 'https://i.pravatar.cc/150?img=13'
         }
     ];

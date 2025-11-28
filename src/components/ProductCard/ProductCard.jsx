@@ -14,7 +14,7 @@ const ProductCard = ({ product }) => {
 
     // Generar link de WhatsApp para cotización
     const whatsappUrl = `https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(
-        'Hola, quiero cotizar un módulo Greenpaw a medida con dimensiones personalizadas. Vengo de la tienda en línea.'
+        'Hola, quiero cotizar un sanitario Greenpaw a medida con dimensiones personalizadas. Vengo de la tienda en línea.'
     )}`;
 
     const handleWhatsAppClick = () => {

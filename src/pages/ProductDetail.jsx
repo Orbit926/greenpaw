@@ -95,14 +95,14 @@ const ProductDetail = () => {
     // Detectar si es el producto especial a medida
     const isCustom = product && (product.isCustom || product.id === 'custom-module');
 
-    // Detectar si el producto tiene la tag "modulo" o "módulo"
+    // Detectar si el producto tiene la tag "sanitario"
     const isModulo = product && product.tags?.some(tag =>
-        tag.toLowerCase() === 'modulo' || tag.toLowerCase() === 'módulo'
+        tag.toLowerCase() === 'sanitario'
     );
 
     // Generar link de WhatsApp para cotización
     const whatsappUrl = `https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(
-        `Hola, quiero cotizar un módulo Greenpaw a medida con dimensiones personalizadas. Vengo de la tienda en línea.`
+        `Hola, quiero cotizar un sanitario Greenpaw a medida con dimensiones personalizadas. Vengo de la tienda en línea.`
     )}`;
 
     const handleWhatsAppClick = () => {
@@ -344,7 +344,7 @@ const ProductDetail = () => {
                             {product.description}
                         </Typography>
 
-                        {/* Mensaje para módulos estándar sugiriendo el módulo a medida */}
+                        {/* Mensaje para sanitarios estándar sugiriendo el sanitario a medida */}
                         {!isCustom && isModulo && (
                             <Box
                                 sx={{
@@ -382,8 +382,8 @@ const ProductDetail = () => {
                                         ¿Necesitas medidas diferentes?
                                     </Typography>
                                     <Typography variant="body2" color="text.secondary" paragraph sx={{ mb: 2 }}>
-                                        Este módulo tiene dimensiones estándar, pero si tu espacio requiere medidas específicas,
-                                        podemos fabricar un módulo personalizado perfecto para ti.
+                                        Este sanitario tiene dimensiones estándar, pero si tu espacio requiere medidas específicas,
+                                        podemos fabricar un sanitario personalizado perfecto para ti.
                                     </Typography>
                                     <Button
                                         component={RouterLink}
@@ -394,7 +394,7 @@ const ProductDetail = () => {
                                         startIcon={<Straighten />}
                                         sx={{ fontWeight: 'bold' }}
                                     >
-                                        Ver módulo a medida
+                                        Ver sanitario a medida
                                     </Button>
                                 </Box>
                             </Box>
@@ -424,7 +424,7 @@ const ProductDetail = () => {
                                     3. Te enviamos una cotización personalizada
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary">
-                                    4. Fabricamos tu módulo a medida
+                                    4. Fabricamos tu sanitario a medida
                                 </Typography>
                             </Box>
                         )}
