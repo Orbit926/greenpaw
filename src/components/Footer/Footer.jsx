@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Container, Typography, IconButton, Grid } from '@mui/material';
-import { Facebook, Instagram, Twitter, Pets, WhatsApp, YouTube, LinkedIn } from '@mui/icons-material';
+import { Facebook, Instagram, Twitter, WhatsApp, YouTube, LinkedIn } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import siteConfig from '../../config/siteConfig';
 
@@ -10,56 +10,57 @@ const Footer = () => {
             <Container maxWidth="lg">
                 <Grid container spacing={4}>
                     <Grid size={{ xs: 12, md: 4 }}>
-                        <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                            <Pets sx={{ mr: 1, fontSize: 28 }} />
-                            <Typography variant="h6" fontWeight="bold">
-                                {siteConfig.company.name}
-                            </Typography>
+                        <Box sx={{ mb: 2 }}>
+                            <img
+                                src="/logos/logo_color.PNG"
+                                alt={siteConfig.company.name}
+                                style={{ height: '50px' }}
+                            />
                         </Box>
                         <Typography variant="body2" sx={{ opacity: 0.8, mb: 2 }}>
                             {siteConfig.company.description}
                         </Typography>
                         <Box>
-                            <IconButton 
-                                color="inherit" 
-                                component="a" 
-                                href={siteConfig.social.facebook} 
+                            <IconButton
+                                color="inherit"
+                                component="a"
+                                href={siteConfig.social.facebook}
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
                                 <Facebook />
                             </IconButton>
-                            <IconButton 
-                                color="inherit" 
-                                component="a" 
-                                href={siteConfig.social.instagram} 
+                            <IconButton
+                                color="inherit"
+                                component="a"
+                                href={siteConfig.social.instagram}
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
                                 <Instagram />
                             </IconButton>
-                            <IconButton 
-                                color="inherit" 
-                                component="a" 
-                                href={siteConfig.social.twitter} 
+                            <IconButton
+                                color="inherit"
+                                component="a"
+                                href={siteConfig.social.twitter}
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
                                 <Twitter />
                             </IconButton>
-                            <IconButton 
-                                color="inherit" 
-                                component="a" 
-                                href={`https://wa.me/${siteConfig.contact.whatsapp}`} 
+                            <IconButton
+                                color="inherit"
+                                component="a"
+                                href={`https://wa.me/${siteConfig.contact.whatsapp}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
                                 <WhatsApp />
                             </IconButton>
-                            <IconButton 
-                                color="inherit" 
-                                component="a" 
-                                href={siteConfig.social.youtube} 
+                            <IconButton
+                                color="inherit"
+                                component="a"
+                                href={siteConfig.social.youtube}
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
@@ -105,23 +106,23 @@ const Footer = () => {
                         </Typography>
                     </Grid>
                 </Grid>
-                <Box sx={{ 
-                    borderTop: '1px solid rgba(255,255,255,0.1)', 
-                    mt: 4, 
-                    pt: 2, 
+                <Box sx={{
+                    borderTop: '1px solid rgba(255,255,255,0.1)',
+                    mt: 4,
+                    pt: 2,
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
                     flexDirection: { xs: 'column', sm: 'row' },
                     gap: 2
                 }}>
-                    <Typography 
+                    <Typography
                         component="a"
                         href="https://www.orbit.com.mx"
                         target="_blank"
                         rel="noopener noreferrer"
-                        variant="body2" 
-                        sx={{ 
+                        variant="body2"
+                        sx={{
                             opacity: 0.5,
                             color: 'white',
                             textDecoration: 'none',

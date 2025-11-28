@@ -6,22 +6,22 @@ import { Recycling, WaterDrop, Forest, Public } from '@mui/icons-material';
 const EcoFriendlySection = () => {
     const ecoFeatures = [
         {
-            icon: <Recycling sx={{ fontSize: 50 }} />,
+            icon: <Recycling sx={{ fontSize: 50, color: 'primary.main' }} />,
             title: 'Plásticos Reciclados',
             description: 'Fabricamos nuestros módulos con plásticos reciclados: tapas de shampoo, botellas PET y otros plásticos rescatados del desecho.'
         },
         {
-            icon: <WaterDrop sx={{ fontSize: 50 }} />,
+            icon: <WaterDrop sx={{ fontSize: 50, color: 'primary.main' }} />,
             title: 'Reducción de Residuos',
             description: 'Cada módulo Greenpaw evita que aproximadamente 2kg de plástico terminen en vertederos o en el océano.'
         },
         {
-            icon: <Forest sx={{ fontSize: 50 }} />,
+            icon: <Forest sx={{ fontSize: 50, color: 'primary.main' }} />,
             title: 'Proceso Sostenible',
             description: 'Utilizamos métodos de producción eficientes que minimizan el consumo energético y la huella de carbono.'
         },
         {
-            icon: <Public sx={{ fontSize: 50 }} />,
+            icon: <Public sx={{ fontSize: 50, color: 'primary.main' }} />,
             title: 'Impacto Positivo',
             description: 'Al elegir Greenpaw, contribuyes activamente a la economía circular y al cuidado del planeta.'
         }
@@ -32,7 +32,7 @@ const EcoFriendlySection = () => {
             sx={{
                 py: { xs: 8, md: 12 },
                 // Replaced hardcoded gradient with theme-based colors
-                background: (theme) => `linear-gradient(180deg, ${theme.palette.background.paper} 0%, ${theme.palette.primary.light}20 100%)`,
+                background: (theme) => `linear-gradient(180deg, ${theme.palette.background.paper} 0%, ${theme.palette.primary.light} 100%)`,
                 position: 'relative',
                 overflow: 'hidden'
             }}
@@ -64,7 +64,7 @@ const EcoFriendlySection = () => {
                         <Typography
                             variant="overline"
                             sx={{
-                                color: 'success.main',
+                                color: 'primary.main',
                                 fontWeight: 600,
                                 letterSpacing: 2,
                                 fontSize: '0.95rem'

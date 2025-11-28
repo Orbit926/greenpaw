@@ -3,21 +3,30 @@ import { createTheme } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#5bc4c3', // Verde sólido principal
-      light: '#96d6d5', // Verde claro para fondos suaves
-      dark: '#3a8f94', // Verde profundo
+      main: '#5bc4c3',
+      light: '#96d6d5',
+      dark: '#3a8f94',
       contrastText: '#FFFFFF',
     },
     secondary: {
-      main: '#3a8f94', // Complementa el primary
+      main: '#478d8a',
+      light: '#75b7b4',
+      dark: '#306462',
+      contrastText: '#ffffff',
+    },
+    success: {
+      main: '#6abf9f',
+      light: '#b4e3d2',
+      dark: '#3e8f74',
+      contrastText: '#ffffff',
     },
     background: {
-      default: '#f6fbfa', // Fondo claro que combina con verde claro
+      default: '#ebffffff',
       paper: '#FFFFFF',
     },
     text: {
-      primary: '#052321', // Verde muy oscuro para buen contraste
-      secondary: '#4a5f5e', // Gris neutro con tinte verde
+      primary: '#3a8f94',
+      secondary: '#666666',
     },
     action: {
       active: '#5bc4c3',

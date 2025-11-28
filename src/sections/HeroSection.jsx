@@ -103,7 +103,7 @@ const HeroSection = () => {
                                 }}
                             >
                                 Naturaleza en
-                                <Box component="span" sx={{ display: 'block', color: 'success.main' }}>
+                                <Box component="span" sx={{ display: 'block', color: 'primary.main' }}>
                                     Tu Hogar
                                 </Box>
                             </Typography>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AppBar, Toolbar, Typography, Button, IconButton, Badge, Box, Container, Drawer, List, ListItem, ListItemButton, ListItemText, Divider } from '@mui/material';
-import { ShoppingCart, Menu as MenuIcon, Pets, Close } from '@mui/icons-material';
+import { ShoppingCart, Menu as MenuIcon, Close } from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import { motion } from 'framer-motion';
@@ -27,11 +27,12 @@ const Navbar = () => {
             <Container maxWidth="xl">
                 <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
                     {/* Logo */}
-                    <Box component={Link} to="/" sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'primary.main' }}>
-                        <Pets sx={{ mr: 1, fontSize: 32 }} />
-                        <Typography variant="h5" fontWeight="700" color="primary.dark">
-                            Greenpaw
-                        </Typography>
+                    <Box component={Link} to="/" sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+                        <img
+                            src="/logos/logo_color.PNG"
+                            alt="Greenpaw"
+                            style={{ height: '50px' }}
+                        />
                     </Box>
 
                     {/* Desktop Menu */}
@@ -47,7 +48,7 @@ const Navbar = () => {
                                 <ShoppingCart />
                             </Badge>
                         </IconButton>
-                        <IconButton 
+                        <IconButton
                             sx={{ display: { xs: 'flex', md: 'none' } }}
                             onClick={toggleDrawer(true)}
                             color="primary"
@@ -69,18 +70,19 @@ const Navbar = () => {
                     role="presentation"
                 >
                     {/* Header */}
-                    <Box sx={{ 
-                        p: 2, 
-                        display: 'flex', 
-                        justifyContent: 'space-between', 
+                    <Box sx={{
+                        p: 2,
+                        display: 'flex',
+                        justifyContent: 'space-between',
                         alignItems: 'center',
                         borderBottom: '1px solid rgba(0,0,0,0.1)'
                     }}>
-                        <Box sx={{ display: 'flex', alignItems: 'center', color: 'primary.main' }}>
-                            <Pets sx={{ mr: 1, fontSize: 28 }} />
-                            <Typography variant="h6" fontWeight="700" color="primary.dark">
-                                Greenpaw
-                            </Typography>
+                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                            <img
+                                src="/logos/logo_color.PNG"
+                                alt="Greenpaw"
+                                style={{ height: '40px' }}
+                            />
                         </Box>
                         <IconButton onClick={toggleDrawer(false)} size="small">
                             <Close />
@@ -91,9 +93,9 @@ const Navbar = () => {
                     <List sx={{ pt: 2 }}>
                         <ListItem disablePadding>
                             <ListItemButton onClick={() => handleNavigation('/')}>
-                                <ListItemText 
-                                    primary="Inicio" 
-                                    primaryTypographyProps={{ 
+                                <ListItemText
+                                    primary="Inicio"
+                                    primaryTypographyProps={{
                                         fontWeight: 500,
                                         fontSize: '1.1rem'
                                     }}
@@ -102,9 +104,9 @@ const Navbar = () => {
                         </ListItem>
                         <ListItem disablePadding>
                             <ListItemButton onClick={() => handleNavigation('/products')}>
-                                <ListItemText 
-                                    primary="Productos" 
-                                    primaryTypographyProps={{ 
+                                <ListItemText
+                                    primary="Productos"
+                                    primaryTypographyProps={{
                                         fontWeight: 500,
                                         fontSize: '1.1rem'
                                     }}

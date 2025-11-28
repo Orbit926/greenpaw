@@ -78,7 +78,7 @@ const AboutSection = () => {
                                 }}
                             >
                                 Bienestar Natural
-                                <Box component="span" sx={{ display: 'block', color: 'success.main' }}>
+                                <Box component="span" sx={{ display: 'block', color: 'primary.main' }}>
                                     para tu Mascota
                                 </Box>
                             </Typography>

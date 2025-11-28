@@ -61,7 +61,7 @@ const TestimonialsSection = () => {
             sx={{
                 py: { xs: 8, md: 12 },
                 // Replaced hardcoded gradient with theme-based colors
-                background: (theme) => `linear-gradient(180deg, ${theme.palette.primary.light}15 0%, ${theme.palette.background.paper} 100%)`
+                background: (theme) => `linear-gradient(180deg, ${theme.palette.background.paper} 0%, ${theme.palette.primary.light} 100%)`
             }}
         >
             <Container maxWidth="lg">
@@ -213,11 +213,11 @@ const TestimonialsSection = () => {
                             borderRadius: 3,
                             bgcolor: 'success.50',
                             border: '2px dashed',
-                            borderColor: 'success.main',
+                            borderColor: 'primary.dark',
                             textAlign: 'center'
                         }}
                     >
-                        <Typography variant="h4" fontWeight="bold" gutterBottom color="success.dark">
+                        <Typography variant="h4" fontWeight="bold" gutterBottom color="primary.dark">
                             {siteConfig.stats.happyCustomers} Familias Felices
                         </Typography>
                         <Typography variant="body1" color="text.secondary">
