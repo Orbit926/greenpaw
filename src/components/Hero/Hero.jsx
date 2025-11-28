@@ -6,13 +6,14 @@ import { Link } from 'react-router-dom';
 const Hero = () => {
     return (
         <Box sx={{
+            height: '100vh',
             bgcolor: 'background.default',
             py: { xs: 8, md: 12 },
             overflow: 'hidden',
-            position: 'relative'
+            position: 'relative',
         }}>
-            <Container maxWidth="lg">
-                <Grid container spacing={6} alignItems="center">
+            <Container maxWidth="lg" sx={{ height: '100%' }}>
+                <Grid container spacing={6} alignItems="center" sx={{ height: '100%' }}>
                     <Grid size={{ xs: 12, md: 6 }}>
                         <motion.div
                             initial={{ opacity: 0, x: -50 }}

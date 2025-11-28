@@ -3,6 +3,7 @@ import { Box, Container, Typography, Grid, Card, CardContent, Button, Chip } fro
 import { motion } from 'framer-motion';
 import { HomeRepairService, LocalShipping, CalendarMonth, LocationOn } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+import siteConfig from '../config/siteConfig';
 
 const MaintenanceSection = () => {
     return (
@@ -100,7 +101,7 @@ const MaintenanceSection = () => {
                                         fontWeight: 'bold'
                                     }}
                                 />
-                                <CardContent sx={{ 
+                                <CardContent sx={{
                                     p: 4,
                                     display: 'flex',
                                     flexDirection: 'column',
@@ -175,6 +176,10 @@ const MaintenanceSection = () => {
                                     </Box>
 
                                     <Button
+                                        component="a"
+                                        href={`https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent('Hola! Me gustaría agendar un servicio de mantenimiento a domicilio para mi módulo Greenpaw.')}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                         variant="contained"
                                         fullWidth
                                         size="large"
@@ -218,7 +223,7 @@ const MaintenanceSection = () => {
                                     }
                                 }}
                             >
-                                <CardContent sx={{ 
+                                <CardContent sx={{
                                     p: 4,
                                     display: 'flex',
                                     flexDirection: 'column',

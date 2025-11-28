@@ -60,7 +60,8 @@ const TestimonialsSection = () => {
         <Box
             sx={{
                 py: { xs: 8, md: 12 },
-                background: 'linear-gradient(180deg, #f1f8e9 0%, #ffffff 100%)'
+                // Replaced hardcoded gradient with theme-based colors
+                background: (theme) => `linear-gradient(180deg, ${theme.palette.primary.light}15 0%, ${theme.palette.background.paper} 100%)`
             }}
         >
             <Container maxWidth="lg">
@@ -134,7 +135,7 @@ const TestimonialsSection = () => {
                                         }
                                     }}
                                 >
-                                    <CardContent sx={{ 
+                                    <CardContent sx={{
                                         p: 4,
                                         display: 'flex',
                                         flexDirection: 'column',

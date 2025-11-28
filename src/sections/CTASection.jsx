@@ -10,7 +10,8 @@ const CTASection = () => {
         <Box
             sx={{
                 py: { xs: 8, md: 12 },
-                background: 'linear-gradient(135deg, #2e7d32 0%, #66bb6a 100%)',
+                // Replaced hardcoded gradient with theme-based colors
+                background: (theme) => `linear-gradient(135deg, ${theme.palette.primary.dark} 0%, ${theme.palette.primary.main} 100%)`,
                 color: 'white',
                 position: 'relative',
                 overflow: 'hidden'
@@ -23,6 +24,7 @@ const CTASection = () => {
                     width: '500px',
                     height: '500px',
                     borderRadius: '50%',
+                    // White overlay for texture - kept as generic transparency
                     background: 'rgba(255, 255, 255, 0.05)',
                     top: '-200px',
                     right: '-150px'

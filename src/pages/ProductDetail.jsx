@@ -297,7 +297,8 @@ const ProductDetail = () => {
                                             height: 80,
                                             borderRadius: 2,
                                             cursor: 'pointer',
-                                            border: index === 0 ? '2px solid #4CAF50' : 'none'
+                                            // Replaced hardcoded color with theme primary.main
+                                            border: (theme) => index === 0 ? `2px solid ${theme.palette.primary.main}` : 'none'
                                         }}
                                     />
                                 ))}
@@ -349,14 +350,16 @@ const ProductDetail = () => {
                                 sx={{
                                     mb: 4,
                                     p: 3,
-                                    background: 'linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%)',
+                                    // Replaced hardcoded gradient with theme-based colors
+                                    background: (theme) => `linear-gradient(135deg, ${theme.palette.primary.light}25 0%, ${theme.palette.primary.light}40 100%)`,
                                     borderRadius: 3,
                                     border: '2px solid',
                                     borderColor: 'success.light',
                                     display: 'flex',
                                     gap: 2,
                                     alignItems: 'start',
-                                    boxShadow: '0 4px 12px rgba(76, 175, 80, 0.1)'
+                                    // Replaced hardcoded shadow with theme primary.main
+                                    boxShadow: (theme) => `0 4px 12px ${theme.palette.primary.main}25`
                                 }}
                             >
                                 <Box

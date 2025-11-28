@@ -31,7 +31,8 @@ const EcoFriendlySection = () => {
         <Box
             sx={{
                 py: { xs: 8, md: 12 },
-                background: 'linear-gradient(180deg, #ffffff 0%, #f1f8e9 100%)',
+                // Replaced hardcoded gradient with theme-based colors
+                background: (theme) => `linear-gradient(180deg, ${theme.palette.background.paper} 0%, ${theme.palette.primary.light}20 100%)`,
                 position: 'relative',
                 overflow: 'hidden'
             }}
@@ -40,12 +41,14 @@ const EcoFriendlySection = () => {
             <Box
                 sx={{
                     position: 'absolute',
-                    width: '400px',
-                    height: '400px',
+                    width: '600px',
+                    height: '600px',
                     borderRadius: '50%',
-                    background: 'radial-gradient(circle, rgba(102, 187, 106, 0.1) 0%, transparent 70%)',
-                    top: '-100px',
-                    left: '-100px',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    // Replaced hardcoded rgba with theme primary.light
+                    background: (theme) => `radial-gradient(circle, ${theme.palette.primary.light}25 0%, transparent 70%)`,
                     zIndex: 0
                 }}
             />
@@ -123,7 +126,7 @@ const EcoFriendlySection = () => {
                                         }
                                     }}
                                 >
-                                    <CardContent sx={{ 
+                                    <CardContent sx={{
                                         p: 4,
                                         display: 'flex',
                                         flexDirection: 'column',
