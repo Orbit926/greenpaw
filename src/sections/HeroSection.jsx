@@ -86,7 +86,7 @@ const HeroSection = () => {
                     }}
                 >
                     {/* Text Content */}
-                    <Box sx={{ flex: 1, textAlign: { xs: 'center', md: 'left' } }}>
+                    <Box sx={{ flex: 1, textAlign: { xs: 'center', md: 'left' }, mt: { xs: 2, md: 0 } }}>
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
