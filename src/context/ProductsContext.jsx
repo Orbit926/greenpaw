@@ -11,7 +11,7 @@ const CUSTOM_MODULE_PRODUCT = {
     title: 'Módulo Greenpaw a medida',
     description: 'Pide tu módulo con medidas personalizadas. Ideal para espacios específicos o necesidades particulares de tu mascota.',
     price: 0, // No tiene precio fijo
-    images: ['/products/modulo_especial.jpeg'],
+    images: ['/img/products/modulo_especial.jpeg'],
     category: 'personalizado',
     ecoScore: 100,
     isCustom: true,

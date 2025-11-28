@@ -36,7 +36,7 @@ const AboutSection = () => {
                         >
                             <Box
                                 component="img"
-                                src="/landing/about/about.jpeg"
+                                src="/img/landing/about/about.jpeg"
                                 alt="Greenpaw - Módulo con pasto"
                                 sx={{
                                     width: '100%',

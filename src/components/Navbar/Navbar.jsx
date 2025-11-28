@@ -29,7 +29,7 @@ const Navbar = () => {
                     {/* Logo */}
                     <Box component={Link} to="/" sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
                         <img
-                            src="/logos/logo_color.PNG"
+                            src="/img/logos/logo_color.PNG"
                             alt="Greenpaw"
                             style={{ height: '50px' }}
                         />
@@ -79,7 +79,7 @@ const Navbar = () => {
                     }}>
                         <Box sx={{ display: 'flex', alignItems: 'center' }}>
                             <img
-                                src="/logos/logo_color.PNG"
+                                src="/img/logos/logo_color.PNG"
                                 alt="Greenpaw"
                                 style={{ height: '40px' }}
                             />

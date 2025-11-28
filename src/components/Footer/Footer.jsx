@@ -12,7 +12,7 @@ const Footer = () => {
                     <Grid size={{ xs: 12, md: 4 }}>
                         <Box sx={{ mb: 2 }}>
                             <img
-                                src="/logos/logo_color.PNG"
+                                src="/img/logos/logo_color.PNG"
                                 alt={siteConfig.company.name}
                                 style={{ height: '50px' }}
                             />

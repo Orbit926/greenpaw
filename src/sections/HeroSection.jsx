@@ -15,12 +15,12 @@ const HeroSection = () => {
     // Array de imágenes - puedes agregar más imágenes aquí fácilmente
     const heroImages = [
         {
-            src: '/landing/hero/hero-1.jpeg',
-            alt: 'Greenpaw - Módulo ecológico 1'
+            src: '/img/landing/hero/hero-1.jpeg',
+            alt: 'Módulo Greenpaw en terraza moderna'
         },
         {
-            src: '/landing/hero/hero-2.jpeg',
-            alt: 'Greenpaw - Módulo ecológico 2'
+            src: '/img/landing/hero/hero-2.jpeg',
+            alt: 'Perro feliz disfrutando de módulo Greenpaw'
         }
     ];
 
