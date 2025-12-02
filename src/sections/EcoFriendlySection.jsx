@@ -187,7 +187,7 @@ const EcoFriendlySection = () => {
                         <Grid container spacing={4}>
                             <Grid size={{ xs: 12, md: 4 }}>
                                 <Typography variant="h3" fontWeight="bold" gutterBottom sx={{ color: 'white' }}>
-                                    2kg+
+                                    18kg+
                                 </Typography>
                                 <Typography variant="body1" sx={{ opacity: 0.9 }}>
                                     Plástico reciclado por sanitario
