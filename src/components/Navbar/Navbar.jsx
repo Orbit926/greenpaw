@@ -62,6 +62,7 @@ const Navbar = () => {
                     <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 4 }}>
                         <Button component={Link} to="/" color="inherit" sx={{ fontSize: '1rem' }}>Inicio</Button>
                         <Button component={Link} to="/products" color="inherit" sx={{ fontSize: '1rem' }}>Productos</Button>
+                        <Button component={Link} to="/cart" color="inherit" sx={{ fontSize: '1rem' }}>Carrito</Button>
                     </Box>
 
                     {/* Actions */}
@@ -129,6 +130,17 @@ const Navbar = () => {
                             <ListItemButton onClick={() => handleNavigation('/products')}>
                                 <ListItemText
                                     primary="Productos"
+                                    primaryTypographyProps={{
+                                        fontWeight: 500,
+                                        fontSize: '1.1rem'
+                                    }}
+                                />
+                            </ListItemButton>
+                        </ListItem>
+                        <ListItem disablePadding>
+                            <ListItemButton onClick={() => handleNavigation('/cart')}>
+                                <ListItemText
+                                    primary="Carrito"
                                     primaryTypographyProps={{
                                         fontWeight: 500,
                                         fontSize: '1.1rem'

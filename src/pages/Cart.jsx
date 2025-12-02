@@ -38,37 +38,84 @@ const Cart = () => {
                     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                         {cart.map((item) => (
                             <motion.div layout key={item.uniqueId}>
-                                <Paper sx={{ p: 2, display: 'flex', gap: 2, alignItems: 'center' }}>
-                                    <Box
-                                        component="img"
-                                        src={item.images[0]}
-                                        alt={item.title}
-                                        sx={{ width: 100, height: 100, borderRadius: 2, objectFit: 'cover' }}
-                                    />
-                                    <Box sx={{ flexGrow: 1 }}>
-                                        <Typography variant="h6" fontWeight="bold">{item.title}</Typography>
-                                        <Typography variant="body2" color="text.secondary">${item.price}</Typography>
-                                        {item.properties && Object.keys(item.properties).length > 0 && (
-                                            <Typography variant="caption" color="primary.main" sx={{ display: 'block', mt: 0.5, fontWeight: 'bold' }}>
-                                                {Object.entries(item.properties).map(([key, value]) => `${key}: ${value}`).join(', ')}
+                                <Paper sx={{ p: 2 }}>
+                                    {/* Layout para desktop */}
+                                    <Box sx={{ 
+                                        display: { xs: 'none', sm: 'flex' }, 
+                                        gap: 2, 
+                                        alignItems: 'center' 
+                                    }}>
+                                        <Box
+                                            component="img"
+                                            src={item.images[0]}
+                                            alt={item.title}
+                                            sx={{ width: 100, height: 100, borderRadius: 2, objectFit: 'cover' }}
+                                        />
+                                        <Box sx={{ flexGrow: 1 }}>
+                                            <Typography variant="h6" fontWeight="bold">{item.title}</Typography>
+                                            <Typography variant="body2" color="text.secondary">${item.price}</Typography>
+                                            {item.properties && Object.keys(item.properties).length > 0 && (
+                                                <Typography variant="caption" color="primary.main" sx={{ display: 'block', mt: 0.5, fontWeight: 'bold' }}>
+                                                    {Object.entries(item.properties).map(([key, value]) => `${key}: ${value}`).join(', ')}
+                                                </Typography>
+                                            )}
+                                        </Box>
+                                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                            <IconButton onClick={() => updateQuantity(item.uniqueId, item.quantity - 1)} disabled={item.quantity <= 1}>
+                                                <Remove />
+                                            </IconButton>
+                                            <Typography fontWeight="bold">{item.quantity}</Typography>
+                                            <IconButton onClick={() => updateQuantity(item.uniqueId, item.quantity + 1)}>
+                                                <Add />
+                                            </IconButton>
+                                        </Box>
+                                        <Typography variant="h6" fontWeight="bold" sx={{ minWidth: 80, textAlign: 'right' }}>
+                                            ${(item.price * item.quantity).toFixed(2)}
+                                        </Typography>
+                                        <IconButton color="error" onClick={() => removeFromCart(item.uniqueId)}>
+                                            <Delete />
+                                        </IconButton>
+                                    </Box>
+
+                                    {/* Layout para móvil */}
+                                    <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
+                                        <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
+                                            <Box
+                                                component="img"
+                                                src={item.images[0]}
+                                                alt={item.title}
+                                                sx={{ width: 80, height: 80, borderRadius: 2, objectFit: 'cover' }}
+                                            />
+                                            <Box sx={{ flex: 1 }}>
+                                                <Typography variant="subtitle1" fontWeight="bold" sx={{ lineHeight: 1.2 }}>
+                                                    {item.title}
+                                                </Typography>
+                                                <Typography variant="body2" color="text.secondary">${item.price}</Typography>
+                                                {item.properties && Object.keys(item.properties).length > 0 && (
+                                                    <Typography variant="caption" color="primary.main" sx={{ display: 'block', mt: 0.5, fontWeight: 'bold' }}>
+                                                        {Object.entries(item.properties).map(([key, value]) => `${key}: ${value}`).join(', ')}
+                                                    </Typography>
+                                                )}
+                                            </Box>
+                                        </Box>
+                                        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                                                <IconButton size="small" onClick={() => updateQuantity(item.uniqueId, item.quantity - 1)} disabled={item.quantity <= 1}>
+                                                    <Remove fontSize="small" />
+                                                </IconButton>
+                                                <Typography fontWeight="bold" sx={{ mx: 1 }}>{item.quantity}</Typography>
+                                                <IconButton size="small" onClick={() => updateQuantity(item.uniqueId, item.quantity + 1)}>
+                                                    <Add fontSize="small" />
+                                                </IconButton>
+                                            </Box>
+                                            <Typography variant="h6" fontWeight="bold">
+                                                ${(item.price * item.quantity).toFixed(2)}
                                             </Typography>
-                                        )}
+                                            <IconButton color="error" size="small" onClick={() => removeFromCart(item.uniqueId)}>
+                                                <Delete fontSize="small" />
+                                            </IconButton>
+                                        </Box>
                                     </Box>
-                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                        <IconButton onClick={() => updateQuantity(item.uniqueId, item.quantity - 1)} disabled={item.quantity <= 1}>
-                                            <Remove />
-                                        </IconButton>
-                                        <Typography fontWeight="bold">{item.quantity}</Typography>
-                                        <IconButton onClick={() => updateQuantity(item.uniqueId, item.quantity + 1)}>
-                                            <Add />
-                                        </IconButton>
-                                    </Box>
-                                    <Typography variant="h6" fontWeight="bold" sx={{ minWidth: 80, textAlign: 'right' }}>
-                                        ${(item.price * item.quantity).toFixed(2)}
-                                    </Typography>
-                                    <IconButton color="error" onClick={() => removeFromCart(item.uniqueId)}>
-                                        <Delete />
-                                    </IconButton>
                                 </Paper>
                             </motion.div>
                         ))}
