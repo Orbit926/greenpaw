@@ -12,6 +12,20 @@ const Products = () => {
     const [sortBy, setSortBy] = useState('featured');
     const [searchTerm, setSearchTerm] = useState('');
 
+    // Orden personalizado para productos destacados
+    const getProductOrder = (product) => {
+        const title = product.title.toLowerCase();
+        // Orden: Módulos (chico, mediano, grande) -> Especial -> Mantenimientos (chico, mediano, grande)
+        if (title.includes('modulo chico') || title.includes('módulo chico')) return 1;
+        if (title.includes('modulo mediano') || title.includes('módulo mediano')) return 2;
+        if (title.includes('modulo grande') || title.includes('módulo grande')) return 3;
+        if (product.id === 'custom-module' || product.isCustom) return 4;
+        if (title.includes('mantenimiento chico')) return 5;
+        if (title.includes('mantenimiento mediano')) return 6;
+        if (title.includes('mantenimiento grande')) return 7;
+        return 10; // El resto al final
+    };
+
     const filteredProducts = useMemo(() => {
         let result = [...products];
 
@@ -34,6 +48,9 @@ const Products = () => {
             result.sort((a, b) => a.price - b.price);
         } else if (sortBy === 'price-desc') {
             result.sort((a, b) => b.price - a.price);
+        } else if (sortBy === 'featured') {
+            // Orden personalizado para destacados
+            result.sort((a, b) => getProductOrder(a) - getProductOrder(b));
         }
 
         return result;

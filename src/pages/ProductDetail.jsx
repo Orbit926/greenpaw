@@ -321,13 +321,6 @@ const ProductDetail = () => {
                             {product.title}
                         </Typography>
 
-                        {!isCustom && (
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 3 }}>
-                                <Rating value={4.8} readOnly precision={0.5} />
-                                <Typography variant="body2" color="text.secondary">(120 reviews)</Typography>
-                            </Box>
-                        )}
-
                         {!isCustom ? (
                             <Typography variant="h4" color="primary.dark" fontWeight="bold" sx={{ mb: 3 }}>
                                 ${product.price}
@@ -335,7 +328,7 @@ const ProductDetail = () => {
                         ) : (
                             <Chip
                                 label="Precio por cotización"
-                                color="success"
+                                color="primary"
                                 sx={{ mb: 3, fontSize: '1rem', py: 2.5, px: 1 }}
                             />
                         )}
@@ -405,13 +398,13 @@ const ProductDetail = () => {
                                 sx={{
                                     mb: 4,
                                     p: 3,
-                                    bgcolor: 'success.50',
+                                    bgcolor: 'primary',
                                     borderRadius: 2,
                                     border: '2px solid',
-                                    borderColor: 'success.main'
+                                    borderColor: 'primary'
                                 }}
                             >
-                                <Typography variant="h6" fontWeight="bold" gutterBottom color="success.dark">
+                                <Typography variant="h6" fontWeight="bold" gutterBottom color="primary.dark">
                                     ¿Cómo funciona?
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary" paragraph>
@@ -535,7 +528,7 @@ const ProductDetail = () => {
                             // Botón de WhatsApp para producto a medida
                             <Button
                                 variant="contained"
-                                color="success"
+                                color="primary"
                                 size="large"
                                 fullWidth
                                 onClick={handleWhatsAppClick}
