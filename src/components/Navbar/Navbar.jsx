@@ -27,9 +27,9 @@ const Navbar = () => {
             <Container maxWidth="xl">
                 <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
                     {/* Logo */}
-                    <Box component={Link} to="/" sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+                    <Box component={Link} to="/" sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none', pt: 1.5 }}>
                         <img
-                            src="/img/logos/logo_color.PNG"
+                            src="/img/logos/nombre/logo_greenpaw.png"
                             alt="Greenpaw"
                             style={{ height: '50px' }}
                         />
