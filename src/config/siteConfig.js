@@ -13,14 +13,14 @@ const siteConfig = {
 
     // Información de contacto
     contact: {
-        email: 'contacto@greenpaw.com',
-        phone: '+52 33 1234 5678',
-        whatsapp: '+523312345678', // Sin espacios ni guiones
+        email: 'greenpaw@gmail.com',
+        phone: '+52 1 33 1845 6588',
+        whatsapp: '+5213318456588', // Sin espacios ni guiones
         address: {
             street: 'Av. Ejemplo #123',
             neighborhood: 'Colonia Centro',
-            city: 'Guadalajara',
-            state: 'Jalisco',
+            city: '',
+            state: '',
             zipCode: '44100',
             country: 'México'
         }
@@ -28,12 +28,9 @@ const siteConfig = {
 
     // Redes sociales
     social: {
-        facebook: 'https://facebook.com/greenpaw',
-        instagram: 'https://instagram.com/greenpaw',
-        twitter: 'https://twitter.com/greenpaw',
+        facebook: 'https://www.facebook.com/profile.php?id=100083410129188',
+        instagram: 'https://www.instagram.com/greenpawmx',
         tiktok: 'https://tiktok.com/@greenpaw',
-        youtube: 'https://youtube.com/@greenpaw',
-        linkedin: 'https://linkedin.com/company/greenpaw'
     },
 
     // Horarios de atención

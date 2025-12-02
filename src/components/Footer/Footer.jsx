@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Container, Typography, IconButton, Grid } from '@mui/material';
-import { Facebook, Instagram, Twitter, WhatsApp, YouTube, LinkedIn } from '@mui/icons-material';
+import { Facebook, Instagram, WhatsApp } from '@mui/icons-material';
+import { FaTiktok } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import siteConfig from '../../config/siteConfig';
 
@@ -8,7 +9,7 @@ const Footer = () => {
     return (
         <Box component="footer" sx={{ bgcolor: 'primary.dark', color: 'white', py: 6, mt: 'auto' }}>
             <Container maxWidth="lg">
-                <Grid container spacing={4}>
+                <Grid container spacing={2}>
                     <Grid size={{ xs: 12, md: 4 }}>
                         <Box sx={{ mb: 2 }}>
                             <img
@@ -42,15 +43,6 @@ const Footer = () => {
                             <IconButton
                                 color="inherit"
                                 component="a"
-                                href={siteConfig.social.twitter}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <Twitter />
-                            </IconButton>
-                            <IconButton
-                                color="inherit"
-                                component="a"
                                 href={`https://wa.me/${siteConfig.contact.whatsapp}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -60,11 +52,11 @@ const Footer = () => {
                             <IconButton
                                 color="inherit"
                                 component="a"
-                                href={siteConfig.social.youtube}
+                                href={siteConfig.social.tiktok}
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                <YouTube />
+                                <FaTiktok />
                             </IconButton>
                         </Box>
                     </Grid>
@@ -80,30 +72,28 @@ const Footer = () => {
                         </Box>
                     </Grid>
 
-                    <Grid size={{ xs: 6, md: 2 }}>
-                        <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
-                            Soporte
-                        </Typography>
-                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-                            <Link to="#" style={{ color: 'white', opacity: 0.8 }}>FAQ</Link>
-                            <Link to="#" style={{ color: 'white', opacity: 0.8 }}>Envíos</Link>
-                            <Link to="#" style={{ color: 'white', opacity: 0.8 }}>Devoluciones</Link>
-                        </Box>
-                    </Grid>
-
                     <Grid size={{ xs: 12, md: 4 }}>
                         <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
                             Contacto
                         </Typography>
-                        <Typography variant="body2" sx={{ opacity: 0.8 }}>
-                            Email: {siteConfig.contact.email}<br />
-                            Tel: {siteConfig.contact.phone}<br />
-                            {siteConfig.contact.address.city}, {siteConfig.contact.address.state}
-                        </Typography>
-                        <Typography variant="body2" sx={{ opacity: 0.8, mt: 2 }}>
-                            {siteConfig.schedule.weekdays}<br />
-                            {siteConfig.schedule.saturday}
-                        </Typography>
+                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                            <Typography
+                                component="a"
+                                href={`mailto:${siteConfig.contact.email}`}
+                                variant="body2"
+                                sx={{ opacity: 0.8, color: 'white', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}
+                            >
+                                Email: {siteConfig.contact.email}
+                            </Typography>
+                            <Typography
+                                component="a"
+                                href={`tel:${siteConfig.contact.phone}`}
+                                variant="body2"
+                                sx={{ opacity: 0.8, color: 'white', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}
+                            >
+                                Tel: {siteConfig.contact.phone}
+                            </Typography>
+                        </Box>
                     </Grid>
                 </Grid>
                 <Box sx={{
