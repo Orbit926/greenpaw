@@ -27,14 +27,37 @@ const Navbar = () => {
             <Container maxWidth="xl">
                 <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
                     {/* Logo */}
-                    <Box component={Link} to="/" sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none', pt: 1.5 }}>
-                        <img
-                            src="/img/logos/nombre/logo_greenpaw.png"
-                            alt="Greenpaw"
-                            style={{ height: '50px' }}
-                        />
+                    <Box
+                    component={Link}
+                    to="/"
+                    sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        textDecoration: 'none',
+                        pt: 1.5,
+                        pb: {xs: 1, md: 0}
+                    }}
+                    >
+                    <Box
+                        component="img"
+                        src="/img/logos/icons/logocelular_greenpaw.png"
+                        alt="Greenpaw"
+                        sx={{
+                        height: "50px",
+                        display: { xs: "block", md: "none" }
+                        }}
+                    />
+                    
+                    <Box
+                        component="img"
+                        src="/img/logos/nombre/logo_greenpaw.png"
+                        alt="Greenpaw"
+                        sx={{
+                        height: "50px",
+                        display: { xs: "none", md: "block" }
+                        }}
+                    />
                     </Box>
-
                     {/* Desktop Menu */}
                     <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 4 }}>
                         <Button component={Link} to="/" color="inherit" sx={{ fontSize: '1rem' }}>Inicio</Button>
