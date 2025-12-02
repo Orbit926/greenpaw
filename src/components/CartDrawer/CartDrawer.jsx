@@ -54,7 +54,7 @@ const CartDrawer = () => {
                                             <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
                                                 ${item.price}
                                             </Typography>
-                                            {item.properties && (
+                                            {item.properties && Object.keys(item.properties).length > 0 && (
                                                 <Typography variant="caption" color="primary.main" sx={{ display: 'block', mb: 1, fontWeight: 'bold' }}>
                                                     {Object.entries(item.properties).map(([key, value]) => `${key}: ${value}`).join(', ')}
                                                 </Typography>

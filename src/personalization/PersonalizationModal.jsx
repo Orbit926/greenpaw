@@ -101,11 +101,18 @@ const PersonalizationModal = ({
         // Construir array de personalizationValues
         const personalizationValues = itemsToPersonalize.map((item) => {
             const config = item.personalizationConfig[0];
+            const value = values[item.lineId]?.trim() || '';
+            
+            // Si el campo es opcional y está vacío, no agregar la propiedad
+            // Si tiene valor, agregarlo
+            const properties = {};
+            if (value) {
+                properties[config.key] = value;
+            }
+            
             return {
                 lineId: item.lineId,
-                properties: {
-                    [config.key]: values[item.lineId],
-                },
+                properties,
             };
         });
 
@@ -185,7 +192,8 @@ const PersonalizationModal = ({
                                     value={values[item.lineId] || ''}
                                     onChange={(newValue) => handleValueChange(item.lineId, newValue)}
                                     error={!!errors[item.lineId]}
-                                    helperText={errors[item.lineId]}
+                                    helperText={errors[item.lineId] || config.helpText || ''}
+                                    required={config.required !== false}
                                 />
 
                                 {/* Divider entre items (excepto el último) */}

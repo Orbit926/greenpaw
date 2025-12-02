@@ -31,6 +31,20 @@ export function getPersonalizationConfigForProduct(product) {
         });
     }
 
+    // Detectar productos módulo (sanitarios) - placa con nombre opcional
+    if (tags.some(tag => tag.toLowerCase() === 'modulo')) {
+        configs.push({
+            type: 'text',
+            key: 'Nombre para placa',
+            fieldComponent: 'TextPersonalizationField',
+            maxLength: 15,
+            required: false,
+            label: '¿Qué nombre quieres en la placa de tu sanitario?',
+            placeholder: 'Ej: Firulais, Luna, Max...',
+            helpText: 'Si lo quieres sin placa, deja el campo vacío.',
+        });
+    }
+
     // Extensible para futuros tipos de personalización:
     // if (tags.includes('personalizable-color')) {
     //   configs.push({

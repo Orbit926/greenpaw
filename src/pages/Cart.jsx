@@ -48,7 +48,7 @@ const Cart = () => {
                                     <Box sx={{ flexGrow: 1 }}>
                                         <Typography variant="h6" fontWeight="bold">{item.title}</Typography>
                                         <Typography variant="body2" color="text.secondary">${item.price}</Typography>
-                                        {item.properties && (
+                                        {item.properties && Object.keys(item.properties).length > 0 && (
                                             <Typography variant="caption" color="primary.main" sx={{ display: 'block', mt: 0.5, fontWeight: 'bold' }}>
                                                 {Object.entries(item.properties).map(([key, value]) => `${key}: ${value}`).join(', ')}
                                             </Typography>

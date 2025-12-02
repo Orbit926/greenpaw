@@ -12,6 +12,7 @@ import { TextField, Typography, Box } from '@mui/material';
  * @param {Function} props.onChange - Callback cuando cambia el valor
  * @param {boolean} props.error - Si hay error
  * @param {string} props.helperText - Texto de ayuda/error
+ * @param {boolean} props.required - Si el campo es requerido
  */
 const TextPersonalizationField = ({
     label = 'Texto personalizado',
@@ -21,6 +22,7 @@ const TextPersonalizationField = ({
     onChange,
     error = false,
     helperText = '',
+    required = true,
 }) => {
     const handleChange = (e) => {
         const newValue = e.target.value;
@@ -44,6 +46,7 @@ const TextPersonalizationField = ({
                 error={error}
                 helperText={helperText}
                 variant="outlined"
+                required={required}
                 inputProps={{
                     maxLength: maxLength,
                 }}

@@ -1,16 +1,21 @@
 import React from 'react';
 import { Card, CardMedia, CardContent, Typography, Button, Box, Chip } from '@mui/material';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import { WhatsApp } from '@mui/icons-material';
 import siteConfig from '../../config/siteConfig';
+import { productNeedsPersonalization } from '../../personalization/personalizationEngine';
 
 const ProductCard = ({ product }) => {
     const { addToCart } = useCart();
+    const navigate = useNavigate();
 
     // Detectar si es el producto especial a medida
     const isCustom = product.isCustom || product.id === 'custom-module';
+    
+    // Detectar si necesita personalización (ej: productos con tag "modulo")
+    const needsPersonalization = productNeedsPersonalization(product);
 
     // Generar link de WhatsApp para cotización
     const whatsappUrl = `https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(
@@ -71,7 +76,14 @@ const ProductCard = ({ product }) => {
                                     <Button
                                         variant="contained"
                                         size="small"
-                                        onClick={() => addToCart(product)}
+                                        onClick={() => {
+                                            if (needsPersonalization) {
+                                                // Redirigir a detalle para personalizar
+                                                navigate(`/products/${product.id}`);
+                                            } else {
+                                                addToCart(product);
+                                            }
+                                        }}
                                         disableElevation
                                     >
                                         Agregar

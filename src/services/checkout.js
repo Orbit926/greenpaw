@@ -27,10 +27,23 @@ export async function goToShopifyCheckout(cartItems) {
     
     // 2. Agregar productos del carrito local al Cart de Shopify
     // Nota: Cart API usa "merchandiseId" en lugar de "variantId"
-    const lines = cartItems.map(item => ({
-      merchandiseId: item.variantId,
-      quantity: item.quantity
-    }));
+    // También incluye "attributes" para propiedades personalizadas
+    const lines = cartItems.map(item => {
+      const line = {
+        merchandiseId: item.variantId,
+        quantity: item.quantity
+      };
+      
+      // Si el item tiene propiedades (personalizaciones), convertirlas a attributes
+      if (item.properties && Object.keys(item.properties).length > 0) {
+        line.attributes = Object.entries(item.properties).map(([key, value]) => ({
+          key,
+          value
+        }));
+      }
+      
+      return line;
+    });
     
     const updatedCart = await addCartLines(cart.id, lines);
     
