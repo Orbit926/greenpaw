@@ -61,7 +61,7 @@ const Footer = () => {
                         </Box>
                     </Grid>
 
-                    <Grid size={{ xs: 6, md: 2 }}>
+                    <Grid size={{ xs: 12, md: 4 }}>
                         <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
                             Enlaces
                         </Typography>

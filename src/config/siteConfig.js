@@ -30,7 +30,7 @@ const siteConfig = {
     social: {
         facebook: 'https://www.facebook.com/profile.php?id=100083410129188',
         instagram: 'https://www.instagram.com/greenpawmx',
-        tiktok: 'https://tiktok.com/@greenpaw',
+        tiktok: 'https://www.tiktok.com/@greenpawmx',
     },
 
     // Horarios de atención
