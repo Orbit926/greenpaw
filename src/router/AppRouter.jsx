@@ -7,6 +7,7 @@ import ProductDetail from '../pages/ProductDetail';
 import Cart from '../pages/Cart';
 import Checkout from '../pages/Checkout';
 import Success from '../pages/Success';
+import NotFound from '../pages/NotFound';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer/Footer';
 import ScrollToTop from '../components/ScrollToTop';
@@ -28,6 +29,7 @@ const AppRouter = () => {
                         <Route path="/cart" element={<Cart />} />
                         <Route path="/checkout" element={<Checkout />} />
                         <Route path="/success" element={<Success />} />
+                        <Route path="*" element={<NotFound />} />
                     </Routes>
                 </AnimatePresence>
             </Box>
