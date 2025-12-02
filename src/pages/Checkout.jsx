@@ -93,6 +93,25 @@ const Checkout = () => {
                     {loading ? <CircularProgress size={24} /> : 'Proceder al Pago'}
                 </Button>
 
+                <Button
+                    onClick={() => navigate('/products')}
+                    variant="outlined"
+                    fullWidth
+                    size="large"
+                    sx={{ 
+                        mt: 2,
+                        color: 'white', 
+                        borderColor: 'rgba(255,255,255,0.5)',
+                        py: 1.5,
+                        '&:hover': { 
+                            borderColor: 'white',
+                            bgcolor: 'rgba(255,255,255,0.1)' 
+                        } 
+                    }}
+                >
+                    Seguir comprando
+                </Button>
+
                 <Typography variant="caption" sx={{ display: 'block', mt: 2, textAlign: 'center', opacity: 0.8 }}>
                     Pago seguro procesado por Shopify
                 </Typography>

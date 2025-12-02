@@ -102,7 +102,7 @@ const Navbar = () => {
                     }}>
                         <Box sx={{ display: 'flex', alignItems: 'center' }}>
                             <img
-                                src="/img/logos/logo_color.PNG"
+                                src="/img/logos/nombre/logo_greenpaw.png"
                                 alt="Greenpaw"
                                 style={{ height: '40px' }}
                             />
