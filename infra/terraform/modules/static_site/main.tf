@@ -16,6 +16,10 @@ resource "aws_s3_bucket" "site" {
   bucket = local.bucket_name
 
   tags = var.tags
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "aws_s3_bucket_versioning" "site" {
@@ -82,6 +86,7 @@ resource "aws_cloudfront_distribution" "this" {
   # Public CDN endpoint. Serves the SPA globally with gzip/brotli compression.
   enabled             = true
   default_root_object = "index.html"
+  aliases             = var.custom_domain_aliases
 
   origin {
     origin_id                = local.origin_id
@@ -104,6 +109,14 @@ resource "aws_cloudfront_distribution" "this" {
 
       cookies {
         forward = "none"
+      }
+    }
+
+    dynamic "function_association" {
+      for_each = var.cloudfront_function_arn != null ? [1] : []
+      content {
+        event_type   = "viewer-request"
+        function_arn = var.cloudfront_function_arn
       }
     }
   }
@@ -131,7 +144,10 @@ resource "aws_cloudfront_distribution" "this" {
   }
 
   viewer_certificate {
-    cloudfront_default_certificate = true
+    cloudfront_default_certificate = var.acm_certificate_arn == null ? true : false
+    acm_certificate_arn            = var.acm_certificate_arn
+    ssl_support_method             = var.acm_certificate_arn != null ? "sni-only" : null
+    minimum_protocol_version       = var.acm_certificate_arn != null ? "TLSv1.2_2021" : null
   }
 
   tags = var.tags
