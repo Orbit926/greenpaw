@@ -47,8 +47,9 @@ export async function goToShopifyCheckout(cartItems) {
     
     const updatedCart = await addCartLines(cart.id, lines);
     
-    // 3. Redirigir al checkout de Shopify usando checkoutUrl
-    window.location.href = updatedCart.checkoutUrl;
+    // 3. Redirigir al checkout de Shopify agregando return_to en la URL
+    const returnUrl = encodeURIComponent('https://www.greenpaw.mx/success');
+    window.location.href = `${updatedCart.checkoutUrl}?return_to=${returnUrl}`;
   } catch (error) {
     console.error('Error al crear checkout:', error);
     throw error;

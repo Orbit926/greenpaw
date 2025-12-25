@@ -1,10 +1,10 @@
 import { shopifyClient } from './shopify.js';
 
 // Crear un nuevo carrito (Cart API moderna)
-export async function createCart() {
+export async function createCart(attributes = []) {
   const CREATE_CART_MUTATION = `
-    mutation {
-      cartCreate(input: {}) {
+    mutation cartCreate($input: CartInput!) {
+      cartCreate(input: $input) {
         cart {
           id
           checkoutUrl
@@ -39,7 +39,9 @@ export async function createCart() {
     }
   `;
   
-  const response = await shopifyClient.query(CREATE_CART_MUTATION);
+  const input = attributes.length > 0 ? { attributes } : {};
+  
+  const response = await shopifyClient.query(CREATE_CART_MUTATION, { input });
   
   // Validar respuesta
   if (!response || !response.data) {
