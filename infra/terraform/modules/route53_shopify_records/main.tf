@@ -29,3 +29,10 @@ resource "aws_route53_record" "shopify_email_cnames" {
   records = [each.value]
 }
 
+resource "aws_route53_record" "checkout" {
+  zone_id = var.zone_id
+  name    = "checkout.${var.apex_domain}"
+  type    = "CNAME"
+  ttl     = 300
+  records = ["f06c5c-3.myshopify.com"]
+}
