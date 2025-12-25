@@ -23,6 +23,17 @@ module "static_site" {
   tags         = var.tags
 }
 
+module "shopify_dns" {
+  source = "./modules/route53_shopify_records"
+
+  zone_id              = "Z0440699OJXI4EVAZIXF"
+  apex_domain          = "greenpaw.mx"
+  shopify_apex_ip      = "23.227.38.65"
+  shopify_cname_target = "shops.myshopify.com"
+  ttl_apex             = 60
+  ttl_www              = 3600
+}
+
 resource "local_file" "stack_outputs" {
   # Writes key outputs to a local file in the same folder where Terraform is executed.
   filename = "${path.module}/stack-outputs.txt"
