@@ -13,7 +13,7 @@ const siteConfig = {
 
     // Información de contacto
     contact: {
-        email: 'greenpaw@gmail.com',
+        email: 'info@greenpaw.mx',
         phone: '+52 1 33 1845 6588',
         whatsapp: '+5213318456588', // Sin espacios ni guiones
         address: {
