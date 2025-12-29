@@ -112,7 +112,7 @@ module "zoho_mail" {
   
   create_dkim_records = true
   dkim_records = {
-    "zmail._domainkey" = "v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCEt1cRVTqf+vmgDMTbjvwfJTPpRk6N7gZKmJAkT+ecEWdCeQDAm5rGkz7HU6ShL9XyJCL9nv5Oo0dRdnWrW1CnaKLNnBk5tf+fwrWGOEaKXlUhMq5bzGq3tixO6GG40/6Xb4dJNav46z18I7VFHKejUH1nwec3P5XsxcVfXgM7QMQIDAQAB"
+    "zmail._domainkey" = "v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCEt1cRVTqf+vmgDMTbjvwfJTPpRk6N7gZKmJAkT+ecEWdCeQDAm5rGkz7HU6ShL9XyJCL9nv5Oo0dRdnWrW1CnaKLNnBk5tf+fwrWG0EaKXluMq5bzGq3tixO6GG40/6Xb4dJNav46z18I7VFHKejUH1nwec3P5XsxcVfXgM7QMQIDAQAB"
   }
   ttl_dkim            = 300
 }
