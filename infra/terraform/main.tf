@@ -95,6 +95,28 @@ module "shopify_dns" {
   create_shopify_email_records = true
 }
 
+module "zoho_mail" {
+  source = "./modules/route53_zoho_mail"
+
+  zone_id     = "Z0440699OJXI4EVAZIXF"
+  domain_name = "greenpaw.mx"
+
+  zoho_verification_code = "zoho-verification=zb67062440.zmverify.zoho.com"
+  ttl                    = 300
+
+  create_mx_records   = true
+  ttl_mx              = 300
+  
+  create_spf_record   = true
+  spf_record          = "v=spf1 include:zohomail.com ~all"
+  
+  create_dkim_records = true
+  dkim_records = {
+    "zmail._domainkey" = "v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCEt1cRVTqf+vmgDMTbjvwfJTPpRk6N7gZKmJAkT+ecEWdCeQDAm5rGkz7HU6ShL9XyJCL9nv5Oo0dRdnWrW1CnaKLNnBk5tf+fwrWGOEaKXlUhMq5bzGq3tixO6GG40/6Xb4dJNav46z18I7VFHKejUH1nwec3P5XsxcVfXgM7QMQIDAQAB"
+  }
+  ttl_dkim            = 300
+}
+
 resource "local_file" "stack_outputs" {
   # Writes key outputs to a local file in the same folder where Terraform is executed.
   filename = "${path.module}/stack-outputs.txt"
