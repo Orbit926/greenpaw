@@ -177,7 +177,7 @@ const HeroSection = () => {
                                         transition: 'all 0.3s'
                                     }}
                                 >
-                                    Explorar Productos
+                                    Comprar
                                 </Button>
                                 <Button
                                     component="a"
