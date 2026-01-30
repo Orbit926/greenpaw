@@ -8,51 +8,27 @@ const TestimonialsSection = () => {
     const testimonials = [
         {
             id: 1,
-            name: 'María González',
-            location: 'Guadalajara, Jal.',
+            name: 'Sofía y Martina',
+            location: '',
             rating: 5,
-            comment: 'Mi perro Max está encantado con su nuevo espacio. El sanitario se ve increíble en mi terraza y es muy fácil de mantener. ¡100% recomendado!',
-            avatar: 'https://i.pravatar.cc/150?img=1'
+            comment: 'Los mejores pastos y el mejor servicio, compré el primero hace 3 años y medio, dos días antes de que llegara mi perrita y fue un éxito nunca hizo fuera del jardín!! Desde bebé se acostumbró a él y solo hizo ahí, y para los que vivimos en depa es una maravilla!! Duran mil y aparte tienen excelente servicio para el mantenimiento y repuestos. La verdad suuuuupeer recomendados!!',
+            avatar: '/img/landing/reviews/resena_1.jpeg'
         },
         {
             id: 2,
-            name: 'Carlos Ramírez',
-            location: 'Ciudad de México',
+            name: 'Anastasia y Sof',
+            location: '',
             rating: 5,
-            comment: 'Excelente calidad y el servicio de envío fue rapidísimo. Me sorprendió lo natural que se ve el pasto. Mi familia está feliz con la compra.',
-            avatar: 'https://i.pravatar.cc/150?img=12'
+            comment: 'Mi experiencia personal ha sido increíble, lo compré desde antes de que recibiera a mi perrita entonces ella solo conoce ese pasto y es en el único lugar donde hace ya sabe buscarlo por que supongo se huele a ella misma. Yo estuve buscando muchas opciones incluso uno de fibra de coco pero me decidí por este y no me arrepiento. La atención ha sido excelente y me encanta que les graban su propia plaquita.',
+            avatar: '/img/landing/reviews/resena_2.jpeg'
         },
         {
             id: 3,
-            name: 'Ana Patricia López',
-            location: 'Monterrey, N.L.',
+            name: 'Maggie y Mojito',
+            location: '',
             rating: 5,
-            comment: 'Además de ser funcional, es hermoso. Me encanta que sea eco-friendly. El kit de mantenimiento llegó perfecto y fue súper fácil de usar.',
-            avatar: 'https://i.pravatar.cc/150?img=5'
-        },
-        {
-            id: 4,
-            name: 'Roberto Sánchez',
-            location: 'Zapopan, Jal.',
-            rating: 5,
-            comment: 'El servicio a domicilio es increíble. El técnico fue muy profesional y dejó todo impecable. Definitivamente vale cada peso.',
-            avatar: 'https://i.pravatar.cc/150?img=8'
-        },
-        {
-            id: 5,
-            name: 'Sofía Hernández',
-            location: 'Querétaro, Qro.',
-            rating: 5,
-            comment: 'Como diseñadora de interiores, valoro mucho la estética. Greenpaw se integra perfectamente con cualquier espacio. ¡Mis clientes lo adoran!',
-            avatar: 'https://i.pravatar.cc/150?img=9'
-        },
-        {
-            id: 6,
-            name: 'Luis Alberto Torres',
-            location: 'Guadalajara, Jal.',
-            rating: 5,
-            comment: 'Tengo tres sanitarios en mi casa. La calidad es excepcional y saber que están hechos con materiales reciclados me hace sentir bien.',
-            avatar: 'https://i.pravatar.cc/150?img=13'
+            comment: 'Tenemos una hembra de 3 años, un macho de 6 y un viejito de 15. A la hembra le decimos simplemente "baño!" y corre a la caja a hacer pis ... y haciendo ella por supuesto van los machos a "firmar" de cualquier manera los sacamos a caminar al menos 3 veces en el día pero la caja es una buenísima opción para la primera pipí de la mañana y urgencias!',
+            avatar: '/img/landing/reviews/resena_3.jpeg'
         }
     ];
 
