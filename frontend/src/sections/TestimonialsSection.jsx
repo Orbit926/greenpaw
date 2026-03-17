@@ -33,6 +33,22 @@ const TestimonialsSection = () => {
             rating: 5,
             comment: 'Tenemos una hembra de 3 años, un macho de 6 y un viejito de 15. A la hembra le decimos simplemente "baño!" y corre a la caja a hacer pis ... y haciendo ella por supuesto van los machos a "firmar" de cualquier manera los sacamos a caminar al menos 3 veces en el día pero la caja es una buenísima opción para la primera pipí de la mañana y urgencias!',
             avatar: '/img/landing/reviews/resena_3.jpeg'
+        },
+        {
+            id: 4,
+            name: 'Mía y Moi',
+            location: '',
+            rating: 5,
+            comment: 'Gracias a Greenpaw, la calidad de vida de mi perrita ha aumentado exponencialmente. Vivo en un departamento y mi perrita está ciega y tiene diabetes, lo cual hace que tenga que ir muchas veces al baño. Cuando no estoy en casa, nuestro Greenpaw nos ha ayudado a mantener la casa limpia y a mi perrita feliz, porque puede ir al baño en pasto real y sentirse limpia ella también. Además, la atención siempre es de lo mejor: ¡siempre con una sonrisa, muy amables y atentos!',
+            avatar: '/img/landing/reviews/resena_4.jpeg'
+        },
+        {
+            id: 5,
+            name: 'Melissa y Pippa',
+            location: '',
+            rating: 5,
+            comment: 'Pippa ha sido muy feliz usando su pasto de Greenpaw ya dos años contratando este servicio mes con mes. Me facilita la vida viviendo en departamento, para tener ese apoyo extra además de los paseos. Así evito salir muy noche a pasearla y ella tiene su espacio seguro. Gracias por el excelente servicio siempre.',
+            avatar: '/img/landing/reviews/resena_5.jpeg'
         }
     ];
 
@@ -100,20 +116,41 @@ const TestimonialsSection = () => {
                     <Swiper
                         modules={[Autoplay]}
                         loop
-                        allowTouchMove={false}
-                        grabCursor={false}
+                        allowTouchMove={true}
+                        grabCursor={true}
                         autoplay={{
-                            delay: 0,
+                            delay: 7000,
                             disableOnInteraction: false,
                             pauseOnMouseEnter: false
                         }}
-                        speed={6500}
+                        speed={1000}
                         spaceBetween={24}
                         slidesPerView={3}
                         breakpoints={{
-                            0: { slidesPerView: 1 },
-                            600: { slidesPerView: 2 },
-                            900: { slidesPerView: 3 }
+                            0: { 
+                                slidesPerView: 1,
+                                autoplay: {
+                                    delay: 7000,
+                                    disableOnInteraction: false
+                                },
+                                speed: 1000
+                            },
+                            600: { 
+                                slidesPerView: 2,
+                                autoplay: {
+                                    delay: 0,
+                                    disableOnInteraction: false
+                                },
+                                speed: 6500
+                            },
+                            900: { 
+                                slidesPerView: 3,
+                                autoplay: {
+                                    delay: 0,
+                                    disableOnInteraction: false
+                                },
+                                speed: 6500
+                            }
                         }}
                     >
                         {carouselItems.map((testimonial, index) => (
