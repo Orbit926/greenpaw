@@ -40,20 +40,79 @@ const HeroSection = () => {
         <Box
             sx={{
                 position: 'relative',
-                minHeight: { xs: '85vh', md: '90vh' },
+                minHeight: { xs: '100dvh', md: '90vh' },
                 display: 'flex',
                 alignItems: 'center',
                 // Replaced hardcoded gradient with theme-based colors
-                background: (theme) => `linear-gradient(135deg, ${theme.palette.primary.light}30 0%, ${theme.palette.primary.light}60 100%)`,
+                background: { xs: 'transparent', md: (theme) => `linear-gradient(135deg, ${theme.palette.primary.light}30 0%, ${theme.palette.primary.light}60 100%)` },
                 overflow: 'hidden'
             }}
         >
-            {/* Decorative circles */}
+            {/* Mobile: Background image layer */}
             <Box
                 sx={{
+                    display: { xs: 'block', md: 'none' },
                     position: 'absolute',
-                    width: { xs: '300px', md: '600px' },
-                    height: { xs: '300px', md: '600px' },
+                    inset: 0,
+                    width: '100%',
+                    height: '100%',
+                    zIndex: 0
+                }}
+            >
+                <Swiper
+                    modules={[Autoplay, EffectFade]}
+                    spaceBetween={0}
+                    slidesPerView={1}
+                    autoplay={{
+                        delay: 5000,
+                        disableOnInteraction: false,
+                    }}
+                    effect="fade"
+                    fadeEffect={{
+                        crossFade: true
+                    }}
+                    loop={heroImages.length > 1}
+                    style={{
+                        width: '100%',
+                        height: '100%'
+                    }}
+                >
+                    {heroImages.map((image, index) => (
+                        <SwiperSlide key={index}>
+                            <Box
+                                component="img"
+                                src={image.src}
+                                alt={image.alt}
+                                sx={{
+                                    width: '100%',
+                                    height: '100%',
+                                    objectFit: 'cover',
+                                    display: 'block'
+                                }}
+                            />
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            </Box>
+
+            {/* Mobile: Dark overlay */}
+            <Box
+                sx={{
+                    display: { xs: 'block', md: 'none' },
+                    position: 'absolute',
+                    inset: 0,
+                    background: 'rgba(0, 0, 0, 0.35)',
+                    zIndex: 1
+                }}
+            />
+
+            {/* Decorative circles - desktop only */}
+            <Box
+                sx={{
+                    display: { xs: 'none', md: 'block' },
+                    position: 'absolute',
+                    width: '600px',
+                    height: '600px',
                     borderRadius: '50%',
                     // Replaced hardcoded rgba with theme primary.dark
                     background: (theme) => `${theme.palette.primary.dark}15`,
@@ -64,9 +123,10 @@ const HeroSection = () => {
             />
             <Box
                 sx={{
+                    display: { xs: 'none', md: 'block' },
                     position: 'absolute',
-                    width: { xs: '200px', md: '400px' },
-                    height: { xs: '200px', md: '400px' },
+                    width: '400px',
+                    height: '400px',
                     borderRadius: '50%',
                     // Replaced hardcoded rgba with theme primary.light
                     background: (theme) => `${theme.palette.primary.light}20`,
@@ -76,7 +136,7 @@ const HeroSection = () => {
                 }}
             />
 
-            <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
+            <Container maxWidth="lg" sx={{ position: 'relative', zIndex: { xs: 2, md: 1 } }}>
                 <Box
                     sx={{
                         display: 'flex',
@@ -86,7 +146,12 @@ const HeroSection = () => {
                     }}
                 >
                     {/* Text Content */}
-                    <Box sx={{ flex: 1, textAlign: { xs: 'center', md: 'left' }, mt: { xs: 2, md: 0 } }}>
+                    <Box sx={{ 
+                        flex: 1, 
+                        textAlign: { xs: 'center', md: 'left' }, 
+                        mt: { xs: 2, md: 0 },
+                        color: { xs: 'white', md: 'inherit' }
+                    }}>
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -95,7 +160,7 @@ const HeroSection = () => {
                             <Typography
                                 variant="overline"
                                 sx={{
-                                    color: 'primary.main',
+                                    color: { xs: 'rgba(255, 255, 255, 0.9)', md: 'primary.main' },
                                     fontWeight: 600,
                                     letterSpacing: 2,
                                     fontSize: { xs: '0.875rem', md: '1rem' }
@@ -110,12 +175,12 @@ const HeroSection = () => {
                                     fontSize: { xs: '2.5rem', sm: '3.5rem', md: '4.5rem' },
                                     lineHeight: 1.1,
                                     mb: 3,
-                                    color: 'primary.dark',
+                                    color: { xs: 'white', md: 'primary.dark' },
                                     mt: 1
                                 }}
                             >
                                 Naturaleza en
-                                <Box component="span" sx={{ display: 'block', color: 'primary.main' }}>
+                                <Box component="span" sx={{ display: 'block', color: { xs: 'rgba(91, 196, 195, 1)', md: 'primary.main' } }}>
                                     Tu Hogar
                                 </Box>
                             </Typography>
@@ -130,7 +195,7 @@ const HeroSection = () => {
                                 variant="h6"
                                 sx={{
                                     mb: 4,
-                                    color: 'text.secondary',
+                                    color: { xs: 'rgba(255, 255, 255, 0.95)', md: 'text.secondary' },
                                     fontWeight: 400,
                                     lineHeight: 1.6,
                                     maxWidth: '600px',
@@ -204,8 +269,8 @@ const HeroSection = () => {
                         </motion.div>
                     </Box>
 
-                    {/* Image Carousel */}
-                    <Box sx={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
+                    {/* Image Carousel - desktop only */}
+                    <Box sx={{ flex: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
                         <motion.div
                             initial={{ opacity: 0, scale: 0.8 }}
                             animate={{ opacity: 1, scale: 1 }}
