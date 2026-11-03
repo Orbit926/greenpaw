@@ -8,6 +8,16 @@ resource "aws_route53_record" "apex" {
   records = [var.shopify_apex_ip]
 }
 
+resource "aws_route53_record" "apex_ipv6" {
+  count = var.create_apex_record ? 1 : 0
+
+  zone_id = var.zone_id
+  name    = var.apex_domain
+  type    = "AAAA"
+  ttl     = var.ttl_apex
+  records = ["2620:0127:f00f:5::"]
+}
+
 resource "aws_route53_record" "www" {
   count = var.create_www_record ? 1 : 0
 
